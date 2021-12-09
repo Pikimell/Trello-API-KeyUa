@@ -25,8 +25,9 @@ provider:
 
 functions:
   hello:
-    handler: handler.hello
+    handler: controllers.columnC.pushColumn
     events:
       - http:
-          path: hello
-          method: get
+          path: pushColumn
+          method: post
+          cors: true
