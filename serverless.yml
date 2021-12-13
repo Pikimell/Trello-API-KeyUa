@@ -42,21 +42,21 @@ functions:
     handler: controllers/columnC.getColumn
     events:
       - http:
-          path: getColumn/{id}
+          path: getColumn/{idColumn}
           method: get
           cors: true
   deleteColumn:
     handler: controllers/columnC.deleteColumn
     vents:
       - http:
-          path: deleteColumn/{id}
+          path: deleteColumn/{idColumn}
           method: delete
           cors: true
   updateColumn:
     handler: controllers/columnC.updateColumn
     events:
       - http:
-          path: updateColumn/{id}
+          path: updateColumn/{idColumn}
           method: put
           cors: true
 
@@ -79,20 +79,20 @@ functions:
       handler: controllers/cardC.getCard
       events:
         - http:
-            path: getCard/{id}
+            path: getCard/{idCard}
             method: get
             cors: true
   deleteCard:
       handler: controllers/cardC.deleteCard
       vents:
         - http:
-            path: deleteCard/{id}
+            path: deleteCard/{idCard}
             method: delete
             cors: true
   updateCard:
       handler: controllers/cardC.updateCard
       events:
         - http:
-            path: updateCard/{id}
+            path: updateCard/{idCard}
             method: put
             cors: true

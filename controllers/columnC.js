@@ -41,7 +41,7 @@ const getColumn = async (event, context, callback) => {
     const params = {
         TableName: COLUMNS_TABLE,
         Key: {
-            id: +event.pathParameters.id,
+            idColumn: +event.pathParameters.idColumn,
         },
     };
     const fetch = fetchDB(callback);
@@ -58,7 +58,7 @@ const pushColumn = async (event, context, callback) => {
     const params = {
         TableName: COLUMNS_TABLE,
         Item: {
-            idColumn: +Date.now(),
+            idColumn: Date.now().toString(),
             title: data.title,
         }
     };
@@ -98,7 +98,7 @@ const updateColumn = async (event, context, callback) => {
             "set title = :title",
         ConditionExpression: "idColumn = :idColumn",
         ExpressionAttributeValues: {
-            ":idColumn": data.id,
+            ":idColumn": data.idColumn,
             ":title": data.title
         },
 

@@ -41,7 +41,7 @@ const getCard = async (event, context, callback) => {
     const params = {
         TableName: CARDS_TABLE,
         Key: {
-            id: +event.pathParameters.id,
+            idCard: +event.pathParameters.idCard,
         },
     };
     const fetch = fetchDB(callback);
@@ -100,7 +100,7 @@ const updateCard = async (event, context, callback) => {
             "set title = :title, description = :description",
         ConditionExpression: "idCard = :idCard",
         ExpressionAttributeValues: {
-            ":idCard": data.id,
+            ":idCard": data.idCard,
             ":title": data.title,
             "description": data.description
         },
