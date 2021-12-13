@@ -59,3 +59,40 @@ functions:
           path: updateColumn/{id}
           method: put
           cors: true
+
+
+  createCard:
+    handler: controllers/cardC.pushCard
+    events:
+      - http:
+          path: pushCard
+          method: post
+          cors: true
+  getCards:
+      handler: controllers/cardC.getCards
+      events:
+        - http:
+            path: getCards
+            method: get
+            cors: true
+  getCard:
+      handler: controllers/cardC.getCard
+      events:
+        - http:
+            path: getCard/{id}
+            method: get
+            cors: true
+  deleteCard:
+      handler: controllers/cardC.deleteCard
+      vents:
+        - http:
+            path: deleteCard/{id}
+            method: delete
+            cors: true
+  updateCard:
+      handler: controllers/cardC.updateCard
+      events:
+        - http:
+            path: updateCard/{id}
+            method: put
+            cors: true

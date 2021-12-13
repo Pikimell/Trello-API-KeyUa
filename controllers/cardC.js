@@ -1,5 +1,5 @@
-const {getColumnsServ,getColumnServ,pushColumnServ,deleteColumnServ,updateColumnServ} = require('../services/columnS')
-const COLUMNS_TABLE = 'pashchenko-columns'
+const {getCardsServ,getCardServ,pushCardServ,deleteCardServ,updateCardServ} = require('../services/cardS')
+const CARDS_TABLE = 'pashchenko-cards'
 
 const fetchDB = (callback) => {
     return (error, result) => {
@@ -24,89 +24,92 @@ const fetchDB = (callback) => {
     }
 }
 
-const getColumns = async (event, context, callback) => {
+const getCards = async (event, context, callback) => {
     const params = {
-        TableName: COLUMNS_TABLE,
+        TableName: CARDS_TABLE,
     };
     const fetch = fetchDB(callback);
     try {
-        const res = await getColumnsServ(params);
+        const res = await getCardsServ(params);
         return fetch(null, res);
     } catch (e) {
         return fetch(e, null);
     }
 };
 
-const getColumn = async (event, context, callback) => {
+const getCard = async (event, context, callback) => {
     const params = {
-        TableName: COLUMNS_TABLE,
+        TableName: CARDS_TABLE,
         Key: {
             id: +event.pathParameters.id,
         },
     };
     const fetch = fetchDB(callback);
     try {
-        const res = await getColumnServ(params);
+        const res = await getCardServ(params);
         return fetch(null, res);
     } catch (e) {
         return fetch(e, null);
     }
 }
 
-const pushColumn = async (event, context, callback) => {
+const pushCard = async (event, context, callback) => {
     const data = JSON.parse(event.body);
     const params = {
-        TableName: COLUMNS_TABLE,
+        TableName: CARDS_TABLE,
         Item: {
             id: +Date.now(),
+            idCol: data.idCol,
             title: data.title,
+            description: data.description
         }
     };
     const fetch = fetchDB(callback);
     try {
-        const res = await pushColumnServ(params);
+        const res = await pushCardServ(params);
         return fetch(null, res);
     } catch (e) {
         return fetch(e, null);
     }
 }
 
-const deleteColumn = async (event, context, callback) => {
+const deleteCard = async (event, context, callback) => {
     const params = {
-        TableName: COLUMNS_TABLE,
+        TableName: CARDS_TABLE,
         Key: {
             id: +event.pathParameters.id,
         }
     };
     const fetch = fetchDB(callback);
     try {
-        const res = await deleteColumnServ(params);
+        const res = await deleteCardServ(params);
         return fetch(null, res);
     } catch (e) {
         return fetch(e, null);
     }
 }
 
-const updateColumn = async (event, context, callback) => {
+const updateCard = async (event, context, callback) => {
     const data = JSON.parse(event.body);
     const params = {
-        TableName: COLUMNS_TABLE,
+        TableName: CARDS_TABLE,
         Key: {
             id: +event.pathParameters.id,
         },
         UpdateExpression:
-            "set title = :title",
-        ConditionExpression: "id = :idCol",
+            "set title = :title, description = :description",
+        ConditionExpression: "id = :id",
         ExpressionAttributeValues: {
             ":id": data.id,
-            ":title": data.title
+            ":title": data.title,
+            "description": data.description
         },
 
-        ReturnValues: "ALL_NEW"
+        ReturnValues: "Card_NEW"
     };
     const fetch = fetchDB(callback);
     try {
-        const res = await updateColumnServ(params);
+        const res = await updateCardServ(params);
         return fetch(null, res);
     } catch (e) {
         return fetch(e, null);
@@ -116,9 +119,9 @@ const updateColumn = async (event, context, callback) => {
 
 
 export {
-    getColumns,
-    getColumn,
-    pushColumn,
-    deleteColumn,
-    updateColumn
+    getCards,
+    getCard,
+    pushCard,
+    deleteCard,
+    updateCard
 }
