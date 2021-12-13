@@ -58,8 +58,8 @@ const pushCard = async (event, context, callback) => {
     const params = {
         TableName: CARDS_TABLE,
         Item: {
-            id: +Date.now(),
-            idCol: data.idCol,
+            idCard: +Date.now(),
+            idColumn: data.idColumn,
             title: data.title,
             description: data.description
         }
@@ -77,7 +77,7 @@ const deleteCard = async (event, context, callback) => {
     const params = {
         TableName: CARDS_TABLE,
         Key: {
-            id: +event.pathParameters.id,
+            idCard: +event.pathParameters.idCard,
         }
     };
     const fetch = fetchDB(callback);
@@ -94,13 +94,13 @@ const updateCard = async (event, context, callback) => {
     const params = {
         TableName: CARDS_TABLE,
         Key: {
-            id: +event.pathParameters.id,
+            idCard: +event.pathParameters.idCard,
         },
         UpdateExpression:
             "set title = :title, description = :description",
-        ConditionExpression: "id = :id",
+        ConditionExpression: "idCard = :idCard",
         ExpressionAttributeValues: {
-            ":id": data.id,
+            ":idCard": data.id,
             ":title": data.title,
             "description": data.description
         },
