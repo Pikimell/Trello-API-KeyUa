@@ -6,4 +6,6 @@ AWS.config.update({
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
-module.exports = dynamoDb
+export {
+    dynamoDb
+}

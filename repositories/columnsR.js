@@ -1,10 +1,13 @@
-const dynamoDb = require("./connection");
+const {dynamoDb} = require("./connection");
 
 const getColumns = (params) => {
     return dynamoDb.scan(params).promise();
 }
 
 const getColumn = (params) => {
+    console.log("\n\n\n")
+    console.log(params);
+
     return dynamoDb.get(params).promise();
 }
 

@@ -24,10 +24,38 @@ provider:
   #  SAMPLE_ENV_VAR: ${env:SAMPLE_ENV_VAR}
 
 functions:
-  hello:
-    handler: controllers.columnC.pushColumn
+  createColumn:
+    handler: controllers/columnC.pushColumn
     events:
       - http:
           path: pushColumn
           method: post
+          cors: true
+  getColumns:
+    handler: controllers/columnC.getColumns
+    events:
+      - http:
+          path: getColumns
+          method: get
+          cors: true
+  getColumn:
+    handler: controllers/columnC.getColumn
+    events:
+      - http:
+          path: getColumn/{id}
+          method: get
+          cors: true
+  deleteColumn:
+    handler: controllers/columnC.deleteColumn
+    vents:
+      - http:
+          path: deleteColumn/{id}
+          method: delete
+          cors: true
+  updateColumn:
+    handler: controllers/columnC.updateColumn
+    events:
+      - http:
+          path: updateColumn/{id}
+          method: put
           cors: true

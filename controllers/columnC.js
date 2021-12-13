@@ -24,10 +24,6 @@ const fetchDB = (callback) => {
     }
 }
 
-const colValidation = (data, callback) => {
-
-}
-
 const getColumns = async (event, context, callback) => {
     const params = {
         TableName: COLUMNS_TABLE,
@@ -59,7 +55,6 @@ const getColumn = async (event, context, callback) => {
 
 const pushColumn = async (event, context, callback) => {
     const data = JSON.parse(event.body);
-    colValidation(data, callback);
     const params = {
         TableName: COLUMNS_TABLE,
         Item: {
