@@ -4,6 +4,7 @@
   "description": "A Node.js starter for Serverless Framework with ES6 and TypeScript support",
   "main": "handler.js",
   "scripts": {
+    "start": "sls offline start",
     "test": "serverless-bundle test"
   },
   "author": "",
@@ -17,5 +18,8 @@
     "serverless-dotenv-plugin": "^2.1.1",
     "serverless-offline": "^5.12.1"
   },
-  "dependencies": {}
+  "dependencies": {
+    "aws-sdk": "^2.1045.0",
+    "npm": "^8.2.0"
+  }
 }
