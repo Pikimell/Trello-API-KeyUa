@@ -94,18 +94,16 @@ const updateCard = async (event, context, callback) => {
     const params = {
         TableName: CARDS_TABLE,
         Key: {
-            idCard: +event.pathParameters.idCard,
+            idCard: event.pathParameters.idCard,
         },
         UpdateExpression:
             "set title = :title, description = :description",
-        ConditionExpression: "idCard = :idCard",
         ExpressionAttributeValues: {
-            ":idCard": data.idCard,
             ":title": data.title,
-            "description": data.description
+            ":description": data.description
         },
 
-        ReturnValues: "Card_NEW"
+        ReturnValues: "ALL_NEW"
     };
     const fetch = fetchDB(callback);
     try {

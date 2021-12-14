@@ -98,9 +98,7 @@ const updateColumn = async (event, context, callback) => {
         },
         UpdateExpression:
             "set title = :title",
-        ConditionExpression: "idColumn = :idColumn",
         ExpressionAttributeValues: {
-            ":idColumn": data.idColumn,
             ":title": data.title
         },
 
