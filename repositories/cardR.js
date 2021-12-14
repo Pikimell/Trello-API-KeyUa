@@ -1,29 +1,29 @@
 const {dynamoDb} = require("./connection");
 
-const getColumns = (params) => {
+const getCards = (params) => {
     return dynamoDb.scan(params).promise();
 }
 
-const getColumn = (params) => {
+const getCard = (params) => {
     return dynamoDb.get(params).promise();
 }
 
-const pushColumn = (params) => {
+const pushCard = (params) => {
     return dynamoDb.put(params).promise();
 }
 
-const deleteColumn = (params) => {
+const deleteCard = (params) => {
     return dynamoDb.delete(params).promise();
 }
 
-const updateColumn = (params) => {
+const updateCard = (params) => {
     return dynamoDb.update(params).promise();
 }
 
 export {
-    getColumns,
-    getColumn,
-    pushColumn,
-    deleteColumn,
-    updateColumn
+    getCards,
+    getCard,
+    pushCard,
+    deleteCard,
+    updateCard
 }
