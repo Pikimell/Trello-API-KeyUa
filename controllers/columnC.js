@@ -41,7 +41,7 @@ const getColumn = async (event, context, callback) => {
     const params = {
         TableName: COLUMNS_TABLE,
         Key: {
-            idColumn: +event.pathParameters.idColumn,
+            idColumn: event.pathParameters.idColumn,
         },
     };
     const fetch = fetchDB(callback);
@@ -58,7 +58,7 @@ const pushColumn = async (event, context, callback) => {
     const params = {
         TableName: COLUMNS_TABLE,
         Item: {
-            idColumn: Date.now().toString(),
+            idColumn: data.idColumn,
             title: data.title,
         }
     };
@@ -75,9 +75,11 @@ const deleteColumn = async (event, context, callback) => {
     const params = {
         TableName: COLUMNS_TABLE,
         Key: {
-            idColumn: +event.pathParameters.idColumn,
+            idColumn: event.pathParameters.idColumn,
         }
     };
+
+    console.log(`\n\n\n${event.pathParameters.idColumn}\n\n\n`);
     const fetch = fetchDB(callback);
     try {
         const res = await deleteColumnServ(params);
@@ -92,7 +94,7 @@ const updateColumn = async (event, context, callback) => {
     const params = {
         TableName: COLUMNS_TABLE,
         Key: {
-            idColumn: +event.pathParameters.idColumn,
+            idColumn: event.pathParameters.idColumn,
         },
         UpdateExpression:
             "set title = :title",
