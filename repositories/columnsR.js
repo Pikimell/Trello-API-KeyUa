@@ -24,6 +24,7 @@ const pushColumn = (data) => {
         Item: {
             idColumn: data.idColumn,
             title: data.title,
+            index: data.index
         }
     };
     return dynamoDb.put(params).promise();
@@ -46,9 +47,10 @@ const updateColumn = ({event, data}) => {
             idColumn: event.pathParameters.idColumn,
         },
         UpdateExpression:
-            "set title = :title",
+            "set title = :title, index = :index",
         ExpressionAttributeValues: {
-            ":title": data.title
+            ":title": data.title,
+            ":index": data.index
         },
         ReturnValues: "ALL_NEW"
     };
