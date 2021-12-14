@@ -1,5 +1,4 @@
 const {getColumnsServ,getColumnServ,pushColumnServ,deleteColumnServ,updateColumnServ} = require('../services/columnS')
-const COLUMNS_TABLE = 'pashchenko-columns'
 
 const fetchDB = (callback) => {
     return (error, result) => {
@@ -25,12 +24,9 @@ const fetchDB = (callback) => {
 }
 
 const getColumns = async (event, context, callback) => {
-    const params = {
-        TableName: COLUMNS_TABLE,
-    };
     const fetch = fetchDB(callback);
     try {
-        const res = await getColumnsServ(params);
+        const res = await getColumnsServ();
         return fetch(null, res);
     } catch (e) {
         return fetch(e, null);
@@ -38,15 +34,9 @@ const getColumns = async (event, context, callback) => {
 };
 
 const getColumn = async (event, context, callback) => {
-    const params = {
-        TableName: COLUMNS_TABLE,
-        Key: {
-            idColumn: event.pathParameters.idColumn,
-        },
-    };
     const fetch = fetchDB(callback);
     try {
-        const res = await getColumnServ(params);
+        const res = await getColumnServ(event);
         return fetch(null, res);
     } catch (e) {
         return fetch(e, null);
@@ -55,16 +45,9 @@ const getColumn = async (event, context, callback) => {
 
 const pushColumn = async (event, context, callback) => {
     const data = JSON.parse(event.body);
-    const params = {
-        TableName: COLUMNS_TABLE,
-        Item: {
-            idColumn: data.idColumn,
-            title: data.title,
-        }
-    };
     const fetch = fetchDB(callback);
     try {
-        const res = await pushColumnServ(params);
+        const res = await pushColumnServ(data);
         return fetch(null, res);
     } catch (e) {
         return fetch(e, null);
@@ -72,17 +55,9 @@ const pushColumn = async (event, context, callback) => {
 }
 
 const deleteColumn = async (event, context, callback) => {
-    const params = {
-        TableName: COLUMNS_TABLE,
-        Key: {
-            idColumn: event.pathParameters.idColumn,
-        }
-    };
-
-    console.log(`\n\n\n${event.pathParameters.idColumn}\n\n\n`);
     const fetch = fetchDB(callback);
     try {
-        const res = await deleteColumnServ(params);
+        const res = await deleteColumnServ(event);
         return fetch(null, res);
     } catch (e) {
         return fetch(e, null);
@@ -91,24 +66,9 @@ const deleteColumn = async (event, context, callback) => {
 
 const updateColumn = async (event, context, callback) => {
     const data = JSON.parse(event.body);
-    const params = {
-        TableName: COLUMNS_TABLE,
-        Key: {
-            idColumn: event.pathParameters.idColumn,
-        },
-        UpdateExpression:
-            "set title = :title",
-        ConditionExpression: "idColumn = :idColumn",
-        ExpressionAttributeValues: {
-            ":idColumn": data.idColumn,
-            ":title": data.title
-        },
-
-        ReturnValues: "ALL_NEW"
-    };
     const fetch = fetchDB(callback);
     try {
-        const res = await updateColumnServ(params);
+        const res = await updateColumnServ({event: event, data:data});
         return fetch(null, res);
     } catch (e) {
         return fetch(e, null);

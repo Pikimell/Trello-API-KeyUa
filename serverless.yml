@@ -47,7 +47,7 @@ functions:
           cors: true
   deleteColumn:
     handler: controllers/columnC.deleteColumn
-    vents:
+    events:
       - http:
           path: deleteColumn/{idColumn}
           method: delete
@@ -84,7 +84,7 @@ functions:
             cors: true
   deleteCard:
       handler: controllers/cardC.deleteCard
-      vents:
+      events:
         - http:
             path: deleteCard/{idCard}
             method: delete

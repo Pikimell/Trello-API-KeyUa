@@ -1,7 +1,7 @@
 const {getCards,getCard,pushCard,deleteCard,updateCard } = require("../repositories/cardR");
 
-const getCardsServ = (params) => {
-    return getCards(params);
+const getCardsServ = () => {
+    return getCards();
 }
 
 const getCardServ = (params) => {

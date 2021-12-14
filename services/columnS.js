@@ -1,7 +1,7 @@
 const {getColumns,getColumn,pushColumn,deleteColumn,updateColumn } = require("../repositories/columnsR");
 
-const getColumnsServ = (params) => {
-    return getColumns(params);
+const getColumnsServ = () => {
+    return getColumns();
 }
 
 const getColumnServ = (params) => {

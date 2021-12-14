@@ -1,22 +1,61 @@
 const {dynamoDb} = require("./connection");
+const CARDS_TABLE = 'pashchenko-cards'
 
-const getCards = (params) => {
+const getCards = () => {
+    const params = {
+        TableName: CARDS_TABLE,
+    };
     return dynamoDb.scan(params).promise();
 }
 
-const getCard = (params) => {
+const getCard = (event) => {
+    const params = {
+        TableName: CARDS_TABLE,
+        Key: {
+            idCard: event.pathParameters.idCard,
+        },
+    };
     return dynamoDb.get(params).promise();
 }
 
-const pushCard = (params) => {
+const pushCard = (data) => {
+    const params = {
+        TableName: CARDS_TABLE,
+        Item: {
+            idCard: data.idCard,
+            idColumn: data.idColumn,
+            title: data.title,
+            description: data.description
+        }
+    };
     return dynamoDb.put(params).promise();
 }
 
-const deleteCard = (params) => {
+const deleteCard = (event) => {
+    const params = {
+        TableName: CARDS_TABLE,
+        Key: {
+            idCard: event.pathParameters.idCard,
+        }
+    };
     return dynamoDb.delete(params).promise();
 }
 
-const updateCard = (params) => {
+const updateCard = ({event,data}) => {
+    const params = {
+        TableName: CARDS_TABLE,
+        Key: {
+            idCard: event.pathParameters.idCard,
+        },
+        UpdateExpression:
+            "set title = :title, description = :description",
+        ExpressionAttributeValues: {
+            ":title": data.title,
+            ":description": data.description
+        },
+
+        ReturnValues: "ALL_NEW"
+    };
     return dynamoDb.update(params).promise();
 }
 
