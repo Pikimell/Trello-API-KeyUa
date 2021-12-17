@@ -59,6 +59,13 @@ functions:
           path: updateColumn/{idColumn}
           method: put
           cors: true
+  updateColumnIndex:
+    handler: controllers/columnC.updateColumnIndex
+    events:
+      - http:
+          path: updateColIndex/{idColumn}
+          method: put
+          cors: true
 
 
   createCard:

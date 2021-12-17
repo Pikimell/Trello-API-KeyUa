@@ -1,4 +1,4 @@
-const {getColumnsServ,getColumnServ,pushColumnServ,deleteColumnServ,updateColumnServ} = require('../services/columnS')
+const {getColumnsServ,getColumnServ,pushColumnServ,deleteColumnServ,updateColumnServ,updateColumnIndexServ} = require('../services/columnS')
 
 const fetchDB = (callback) => {
     return (error, result) => {
@@ -75,12 +75,22 @@ const updateColumn = async (event, context, callback) => {
     }
 }
 
-
+const updateColumnIndex = async (event, context, callback) => {
+    const data = JSON.parse(event.body);
+    const fetch = fetchDB(callback);
+    try {
+        const res = await updateColumnIndexServ({event: event, data:data});
+        return fetch(null, res);
+    } catch (e) {
+        return fetch(e, null);
+    }
+}
 
 export {
     getColumns,
     getColumn,
     pushColumn,
     deleteColumn,
-    updateColumn
+    updateColumn,
+    updateColumnIndex
 }
