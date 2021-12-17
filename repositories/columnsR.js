@@ -23,8 +23,7 @@ const pushColumn = (data) => {
         TableName: COLUMNS_TABLE,
         Item: {
             idColumn: data.idColumn,
-            title: data.title,
-            indexColumn: data.indexColumn
+            title: data.title
         }
     };
     return dynamoDb.put(params).promise();
@@ -47,26 +46,9 @@ const updateColumn = ({event, data}) => {
             idColumn: event.pathParameters.idColumn,
         },
         UpdateExpression:
-            "set title = :title, indexColumn = :index",
+            "set title = :title",
         ExpressionAttributeValues: {
-            ":title": data.title,
-            ":index": data.index
-        },
-        ReturnValues: "ALL_NEW"
-    };
-    return dynamoDb.update(params).promise();
-}
-
-const updateColumnIndex = ({event, data}) => {
-    const params = {
-        TableName: COLUMNS_TABLE,
-        Key: {
-            idColumn: event.pathParameters.idColumn,
-        },
-        UpdateExpression:
-            "set indexColumn = :indexCol",
-        ExpressionAttributeValues: {
-            ":indexCol": data.indexColumn
+            ":title": data.title
         },
         ReturnValues: "ALL_NEW"
     };
@@ -80,6 +62,5 @@ export {
     getColumn,
     pushColumn,
     deleteColumn,
-    updateColumn,
-    updateColumnIndex
+    updateColumn
 }

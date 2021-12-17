@@ -59,13 +59,8 @@ functions:
           path: updateColumn/{idColumn}
           method: put
           cors: true
-  updateColumnIndex:
-    handler: controllers/columnC.updateColumnIndex
-    events:
-      - http:
-          path: updateColIndex/{idColumn}
-          method: put
-          cors: true
+
+
 
 
   createCard:
@@ -103,3 +98,27 @@ functions:
             path: updateCard/{idCard}
             method: put
             cors: true
+
+
+
+  createIndexes:
+    handler: controllers/columnIndexC.pushIndexes
+    events:
+      - http:
+          path: pushIndexes
+          method: post
+          cors: true
+  getColumnIndex:
+    handler: controllers/columnIndexC.getIndexes
+    events:
+      - http:
+          path: getColIndexes
+          method: get
+          cors: true
+  updateColumnIndex:
+    handler: controllers/columnIndexC.updateIndexes
+    events:
+      - http:
+          path: updateIndexes/{idIndex}
+          method: put
+          cors: true
