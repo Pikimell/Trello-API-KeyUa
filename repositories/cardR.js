@@ -48,10 +48,11 @@ const updateCard = ({event,data}) => {
             idCard: event.pathParameters.idCard,
         },
         UpdateExpression:
-            "set title = :title, description = :description",
+            "set title = :title, description = :description, idColumn = :idColumn",
         ExpressionAttributeValues: {
             ":title": data.title,
             ":description": data.description,
+            ":idColumn": data.idColumn
         },
 
         ReturnValues: "ALL_NEW"

@@ -122,3 +122,41 @@ functions:
           path: updateIndexes/{idIndex}
           method: put
           cors: true
+
+
+
+  createCardIndexes:
+    handler: controllers/cardIndexC.pushIndexes
+    events:
+      - http:
+          path: pushColumnIndexes
+          method: post
+          cors: true
+  getCardsIndex:
+      handler: controllers/cardIndexC.getIndexes
+      events:
+        - http:
+            path: getCardIndexes
+            method: get
+            cors: true
+  getIndexesForCol:
+      handler: controllers/cardIndexC.getIndexesForCol
+      events:
+        - http:
+            path: getIndexesForCol/{idColumn}
+            method: get
+            cors: true
+  updateCardIndex:
+      handler: controllers/cardIndexC.updateIndexes
+      events:
+        - http:
+            path: updateCardsIndexes/{idIndex}
+            method: put
+            cors: true
+  deleteCardIndex:
+      handler: controllers/cardIndexC.deleteIndexCard
+      events:
+        - http:
+            path: deleteCardIndexes/{idColumn}
+            method: delete
+            cors: true
