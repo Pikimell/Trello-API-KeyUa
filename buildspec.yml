@@ -5,6 +5,9 @@ phases:
     commands:
       - npm install
       - npm i -g serverless
+      - pip install --upgrade pip
+      - pip install --upgrade awscli
+      - sls deploy -s dev --verbose
   build:
     commands:
       - serverless deploy
