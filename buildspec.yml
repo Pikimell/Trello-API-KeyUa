@@ -6,7 +6,7 @@ phases:
       - npm install
   build:
     commands:
-      - npm start
-artifacts:
-  files:
-    - '**/*'
+      - sls deploy
+  post_build:
+    commands:
+      - aws s3 sync ./dist s3://volodka-trello-api/
