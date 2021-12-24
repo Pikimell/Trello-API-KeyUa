@@ -61,6 +61,8 @@ functions:
           cors: true
 
 
+
+
   createCard:
     handler: controllers/cardC.pushCard
     events:
@@ -95,4 +97,66 @@ functions:
         - http:
             path: updateCard/{idCard}
             method: put
+            cors: true
+
+
+
+  createIndexes:
+    handler: controllers/columnIndexC.pushIndexes
+    events:
+      - http:
+          path: pushIndexes
+          method: post
+          cors: true
+  getColumnIndex:
+    handler: controllers/columnIndexC.getIndexes
+    events:
+      - http:
+          path: getColIndexes
+          method: get
+          cors: true
+  updateColumnIndex:
+    handler: controllers/columnIndexC.updateIndexes
+    events:
+      - http:
+          path: updateIndexes/{idIndex}
+          method: put
+          cors: true
+
+
+
+  createCardIndexes:
+    handler: controllers/cardIndexC.pushIndexes
+    events:
+      - http:
+          path: pushColumnIndexes
+          method: post
+          cors: true
+  getCardsIndex:
+      handler: controllers/cardIndexC.getIndexes
+      events:
+        - http:
+            path: getCardIndexes
+            method: get
+            cors: true
+  getIndexesForCol:
+      handler: controllers/cardIndexC.getIndexesForCol
+      events:
+        - http:
+            path: getIndexesForCol/{idColumn}
+            method: get
+            cors: true
+  updateCardIndex:
+      handler: controllers/cardIndexC.updateIndexes
+      events:
+        - http:
+            path: updateCardsIndexes/{idIndex}
+            method: put
+            cors: true
+  deleteCardIndex:
+      handler: controllers/cardIndexC.deleteIndexCard
+      events:
+        - http:
+            path: deleteCardIndexes/{idColumn}
+            method: delete
             cors: true

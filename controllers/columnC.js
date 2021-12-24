@@ -1,27 +1,5 @@
 const {getColumnsServ,getColumnServ,pushColumnServ,deleteColumnServ,updateColumnServ} = require('../services/columnS')
-
-const fetchDB = (callback) => {
-    return (error, result) => {
-        if (error) {
-            console.error(error);
-            callback(null, {
-                statusCode: error.statusCode || 501,
-                headers: {"Content-Type": "text/plain"},
-                body: "Couldn't fetch."
-            });
-        }
-
-        // create a response
-        const response = {
-            statusCode: 200,
-            headers: {
-                "Access-Control-Allow-Origin": "*"
-            },
-            body: JSON.stringify(result),
-        };
-        callback(null, response);
-    }
-}
+const {fetchDB} = require('../helpers/index')
 
 const getColumns = async (event, context, callback) => {
     const fetch = fetchDB(callback);
@@ -74,7 +52,6 @@ const updateColumn = async (event, context, callback) => {
         return fetch(e, null);
     }
 }
-
 
 
 export {

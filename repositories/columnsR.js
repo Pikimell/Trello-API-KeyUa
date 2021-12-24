@@ -23,7 +23,7 @@ const pushColumn = (data) => {
         TableName: COLUMNS_TABLE,
         Item: {
             idColumn: data.idColumn,
-            title: data.title,
+            title: data.title
         }
     };
     return dynamoDb.put(params).promise();
@@ -54,6 +54,8 @@ const updateColumn = ({event, data}) => {
     };
     return dynamoDb.update(params).promise();
 }
+
+
 
 export {
     getColumns,

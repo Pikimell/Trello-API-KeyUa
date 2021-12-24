@@ -25,7 +25,7 @@ const pushCard = (data) => {
             idCard: data.idCard,
             idColumn: data.idColumn,
             title: data.title,
-            description: data.description
+            description: data.description,
         }
     };
     return dynamoDb.put(params).promise();
@@ -48,10 +48,11 @@ const updateCard = ({event,data}) => {
             idCard: event.pathParameters.idCard,
         },
         UpdateExpression:
-            "set title = :title, description = :description",
+            "set title = :title, description = :description, idColumn = :idColumn",
         ExpressionAttributeValues: {
             ":title": data.title,
-            ":description": data.description
+            ":description": data.description,
+            ":idColumn": data.idColumn
         },
 
         ReturnValues: "ALL_NEW"
