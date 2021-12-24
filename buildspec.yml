@@ -7,10 +7,6 @@ phases:
       - npm i -g serverless
       - pip install --upgrade pip
       - pip install --upgrade awscli
-      - sls deploy -s dev --verbose
   build:
     commands:
-      - serverless deploy
-  post_build:
-    commands:
-      - aws s3 sync ./dist s3://volodka-trello-api/
+      - sls deploy -s dev --verbose
