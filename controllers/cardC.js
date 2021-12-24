@@ -1,5 +1,5 @@
-const {getCardsServ,getCardServ,pushCardServ,deleteCardServ,updateCardServ} = require('../services/cardS')
-const {fetchDB} = require('../helpers/index')
+const {getCardsServ,getCardServ,pushCardServ,deleteCardServ,updateCardServ} = require('../services/cardS');
+const {fetchDB} = require('../helpers/index');
 
 const getCards = async (event, context, callback) => {
     const fetch = fetchDB(callback);
@@ -20,7 +20,7 @@ const getCard = async (event, context, callback) => {
     } catch (e) {
         return fetch(e, null);
     }
-}
+};
 
 const pushCard = async (event, context, callback) => {
     const data = JSON.parse(event.body);
@@ -31,7 +31,7 @@ const pushCard = async (event, context, callback) => {
     } catch (e) {
         return fetch(e, null);
     }
-}
+};
 
 const deleteCard = async (event, context, callback) => {
 
@@ -42,7 +42,7 @@ const deleteCard = async (event, context, callback) => {
     } catch (e) {
         return fetch(e, null);
     }
-}
+};
 
 const updateCard = async (event, context, callback) => {
     const data = JSON.parse(event.body);
@@ -53,9 +53,7 @@ const updateCard = async (event, context, callback) => {
     } catch (e) {
         return fetch(e, null);
     }
-}
-
-
+};
 
 export {
     getCards,
@@ -63,4 +61,4 @@ export {
     pushCard,
     deleteCard,
     updateCard
-}
+};

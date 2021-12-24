@@ -1,5 +1,5 @@
-const {getColumnsServ,getColumnServ,pushColumnServ,deleteColumnServ,updateColumnServ} = require('../services/columnS')
-const {fetchDB} = require('../helpers/index')
+const {getColumnsServ,getColumnServ,pushColumnServ,deleteColumnServ,updateColumnServ} = require('../services/columnS');
+const {fetchDB} = require('../helpers/index');
 
 const getColumns = async (event, context, callback) => {
     const fetch = fetchDB(callback);
@@ -19,7 +19,7 @@ const getColumn = async (event, context, callback) => {
     } catch (e) {
         return fetch(e, null);
     }
-}
+};
 
 const pushColumn = async (event, context, callback) => {
     const data = JSON.parse(event.body);
@@ -30,7 +30,7 @@ const pushColumn = async (event, context, callback) => {
     } catch (e) {
         return fetch(e, null);
     }
-}
+};
 
 const deleteColumn = async (event, context, callback) => {
     const fetch = fetchDB(callback);
@@ -40,7 +40,7 @@ const deleteColumn = async (event, context, callback) => {
     } catch (e) {
         return fetch(e, null);
     }
-}
+};
 
 const updateColumn = async (event, context, callback) => {
     const data = JSON.parse(event.body);
@@ -51,7 +51,7 @@ const updateColumn = async (event, context, callback) => {
     } catch (e) {
         return fetch(e, null);
     }
-}
+};
 
 
 export {
@@ -60,4 +60,4 @@ export {
     pushColumn,
     deleteColumn,
     updateColumn
-}
+};

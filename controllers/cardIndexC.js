@@ -1,7 +1,5 @@
-import {deleteColumnServ} from "../services/columnS";
-
-const {getIndexesCardS,pushIndexesCardS,updateIndexesCardS,getIndexesForColS,deleteIndexCardS} = require('../services/cardIndexS')
-const {fetchDB} = require('../helpers/index')
+const {getIndexesCardS,pushIndexesCardS,updateIndexesCardS,getIndexesForColS,deleteIndexCardS} = require('../services/cardIndexS');
+const {fetchDB} = require('../helpers/index');
 
 const getIndexes = async (event, context, callback) => {
     const fetch = fetchDB(callback);
@@ -32,7 +30,7 @@ const pushIndexes = async (event, context, callback) => {
     } catch (e) {
         return fetch(e, null);
     }
-}
+};
 
 const updateIndexes = async (event, context, callback) => {
     const data = JSON.parse(event.body);
@@ -43,7 +41,7 @@ const updateIndexes = async (event, context, callback) => {
     } catch (e) {
         return fetch(e, null);
     }
-}
+};
 
 const deleteIndexCard = async (event, context, callback) => {
     const fetch = fetchDB(callback);
@@ -53,7 +51,7 @@ const deleteIndexCard = async (event, context, callback) => {
     } catch (e) {
         return fetch(e, null);
     }
-}
+};
 
 export {
     getIndexes,
@@ -61,4 +59,4 @@ export {
     updateIndexes,
     getIndexesForCol,
     deleteIndexCard,
-}
+};

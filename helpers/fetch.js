@@ -18,9 +18,9 @@ const fetchDB = (callback) => {
             body: JSON.stringify(result),
         };
         callback(null, response);
-    }
-}
+    };
+};
 
 export {
     fetchDB
-}
+};

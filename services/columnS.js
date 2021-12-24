@@ -2,23 +2,23 @@ const {getColumns,getColumn,pushColumn,deleteColumn,updateColumn } = require("..
 
 const getColumnsServ = () => {
     return getColumns();
-}
+};
 
 const getColumnServ = (params) => {
     return getColumn(params);
-}
+};
 
 const pushColumnServ = (params) => {
     return pushColumn(params);
-}
+};
 
 const deleteColumnServ = (params) => {
     return deleteColumn(params);
-}
+};
 
 const updateColumnServ = (params) => {
     return updateColumn(params);
-}
+};
 
 
 export {
@@ -27,4 +27,4 @@ export {
     pushColumnServ,
     deleteColumnServ,
     updateColumnServ
-}
+};
