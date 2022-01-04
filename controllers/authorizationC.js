@@ -36,37 +36,34 @@ const signIn = async (event) => {
     const {email, password} = data;
 
     return new Promise((resolve) => {
-        getCognitoUser(email).authenticateUser(getAuthDetails(email,password),{
-
-            onSuccess: (result) => {
-                const token = {
-                    accessToken: result.getAccessToken(),
-                    idToken: result.getIdToken(),
-                    refreshToken: result.getRefreshToken()
-                };
-                try{
+        try{
+            getCognitoUser(email).authenticateUser(getAuthDetails(email,password),{
+                onSuccess: (result) => {
+                    const token = {
+                        accessToken: result.getAccessToken(),
+                        idToken: result.getIdToken(),
+                        refreshToken: result.getRefreshToken()
+                    };
                     resolve({
                         statusCode: 200,
                         headers: {"Access-Control-Allow-Origin":"*"},
                         body: JSON.stringify(token)
                     });
-                }catch (err){
+                },
+                onFailure: function(err) {
                     resolve({
                         statusCode: 400,
-                        headers: {"Access-Control-Allow-Origin":"*"},
+                        headers: {"Content-Type": "text/plain"},
                         body: err.toString()
                     });
                 }
-
-            },
-            onFailure: function(err) {
-                resolve({
-                    statusCode: 400,
-                    headers: {"Content-Type": "text/plain"},
-                    body: err.toString()
-                });
-            }
-        });
+            });
+        }catch (err){
+            resolve({
+                statusCode: 400,
+                body: err.toString()
+            });
+        }
     });
 };
 
