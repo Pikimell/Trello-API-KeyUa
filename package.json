@@ -19,6 +19,7 @@
     "serverless-offline": "^5.12.1"
   },
   "dependencies": {
+    "@types/jwt-decode": "^3.1.0",
     "amazon-cognito-identity-js": "^5.2.3",
     "aws-sdk": "^2.1045.0",
     "jwt-decode": "^3.1.2",

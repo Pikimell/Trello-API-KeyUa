@@ -1,10 +1,10 @@
 const AmazonCognitoIdentity = require('amazon-cognito-identity-js');
-const jwt_decode = require('jwt-decode');
 
 const poolData = {
-    UserPoolId: 'us-east-2_dtSlpb6U3',
-    ClientId: '5ptet6oq1th1i3cpdjaf7no20f'
+    UserPoolId: process.env.USER_POOL_ID,
+    ClientId: process.env.CLIENT_ID
 };
+
 const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
 
 
@@ -26,15 +26,9 @@ function getAuthDetails(login,password){
     return new AmazonCognitoIdentity.AuthenticationDetails(userData);
 }
 
-
-function getJWT(token){
-    let {email,exp,auth_time,token_use,sub} = jwt_decode(token.idToken);
-    return {token, email, exp, auth_time, token_use, sub};
-}
-
 const signIn = async (event) => {
     const data = JSON.parse(event.body);
-    const {email,password} = data;
+    const {email, password} = data;
 
     return new Promise((resolve) => {
         getCognitoUser(email).authenticateUser(getAuthDetails(email,password),{
@@ -45,17 +39,26 @@ const signIn = async (event) => {
                     idToken: result.getIdToken(),
                     refreshToken: result.getRefreshToken()
                 };
+                try{
+                    resolve({
+                        statusCode: 200,
+                        headers: {"Access-Control-Allow-Origin":"*"},
+                        body: JSON.stringify(token)
+                    });
+                }catch (err){
+                    resolve({
+                        statusCode: 400,
+                        headers: {"Access-Control-Allow-Origin":"*"},
+                        body: err.toString()
+                    });
+                }
 
-                resolve({
-                    statusCode: 200,
-                    headers: {"Access-Control-Allow-Origin":"*"},
-                    body: JSON.stringify(getJWT(token))
-                });
             },
-            onFailure: function() {
+            onFailure: function(err) {
                 resolve({
                     statusCode: 400,
-                    body: JSON.stringify(getAuthDetails(email,password))
+                    headers: {"Content-Type": "text/plain"},
+                    body: err.toString()
                 });
             }
         });

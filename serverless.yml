@@ -200,8 +200,18 @@ functions:
 
   auth:
     handler: controllers/authorizationC.signIn
+    evironment:
+      USER_POOL_ID: ${ssm:/VOLODKA_COGNITO_USER_POOL_ID}
+      CLIENT_ID: ${ssm:/VOLODKA_COGNITO_CLIENT_ID}
     events:
       - http:
           path: signIn
+          method: post
+          cors: true
+  signUp:
+    handler: controllers/SignUp.signUp
+    events:
+      - http:
+          path: signUp
           method: post
           cors: true
