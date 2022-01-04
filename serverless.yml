@@ -31,6 +31,8 @@ functions:
           path: pushColumn
           method: post
           cors: true
+          authorizer:
+            arn: arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
   getColumns:
     handler: controllers/columnC.getColumns
     events:
@@ -38,6 +40,8 @@ functions:
           path: getColumns
           method: get
           cors: true
+          authorizer:
+            arn: arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
   getColumn:
     handler: controllers/columnC.getColumn
     events:
@@ -45,6 +49,8 @@ functions:
           path: getColumn/{idColumn}
           method: get
           cors: true
+          authorizer:
+            arn: arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
   deleteColumn:
     handler: controllers/columnC.deleteColumn
     events:
@@ -52,6 +58,8 @@ functions:
           path: deleteColumn/{idColumn}
           method: delete
           cors: true
+          authorizer:
+            arn: arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
   updateColumn:
     handler: controllers/columnC.updateColumn
     events:
@@ -59,6 +67,8 @@ functions:
           path: updateColumn/{idColumn}
           method: put
           cors: true
+          authorizer:
+            arn: arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
 
 
 
@@ -70,6 +80,8 @@ functions:
           path: pushCard
           method: post
           cors: true
+          authorizer:
+            arn: arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
   getCards:
       handler: controllers/cardC.getCards
       events:
@@ -77,6 +89,8 @@ functions:
             path: getCards
             method: get
             cors: true
+            authorizer:
+            arn: arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
   getCard:
       handler: controllers/cardC.getCard
       events:
@@ -84,6 +98,8 @@ functions:
             path: getCard/{idCard}
             method: get
             cors: true
+            authorizer:
+            arn: arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
   deleteCard:
       handler: controllers/cardC.deleteCard
       events:
@@ -91,6 +107,8 @@ functions:
             path: deleteCard/{idCard}
             method: delete
             cors: true
+            authorizer:
+            arn: arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
   updateCard:
       handler: controllers/cardC.updateCard
       events:
@@ -98,6 +116,8 @@ functions:
             path: updateCard/{idCard}
             method: put
             cors: true
+            authorizer:
+            arn: arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
 
 
 
@@ -108,6 +128,8 @@ functions:
           path: pushIndexes
           method: post
           cors: true
+          authorizer:
+            arn: arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
   getColumnIndex:
     handler: controllers/columnIndexC.getIndexes
     events:
@@ -115,6 +137,8 @@ functions:
           path: getColIndexes
           method: get
           cors: true
+          authorizer:
+            arn: arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
   updateColumnIndex:
     handler: controllers/columnIndexC.updateIndexes
     events:
@@ -122,6 +146,8 @@ functions:
           path: updateIndexes/{idIndex}
           method: put
           cors: true
+          authorizer:
+            arn: arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
 
 
 
@@ -132,6 +158,8 @@ functions:
           path: pushColumnIndexes
           method: post
           cors: true
+          authorizer:
+            arn: arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
   getCardsIndex:
       handler: controllers/cardIndexC.getIndexes
       events:
@@ -139,6 +167,8 @@ functions:
             path: getCardIndexes
             method: get
             cors: true
+            authorizer:
+            arn: arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
   getIndexesForCol:
       handler: controllers/cardIndexC.getIndexesForCol
       events:
@@ -146,6 +176,8 @@ functions:
             path: getIndexesForCol/{idColumn}
             method: get
             cors: true
+            authorizer:
+            arn: arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
   updateCardIndex:
       handler: controllers/cardIndexC.updateIndexes
       events:
@@ -153,6 +185,8 @@ functions:
             path: updateCardsIndexes/{idIndex}
             method: put
             cors: true
+            authorizer:
+            arn: arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
   deleteCardIndex:
       handler: controllers/cardIndexC.deleteIndexCard
       events:
@@ -160,3 +194,14 @@ functions:
             path: deleteCardIndexes/{idColumn}
             method: delete
             cors: true
+            authorizer:
+            arn: arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
+
+
+  auth:
+    handler: controllers/authorizationC.signIn
+    events:
+      - http:
+          path: signIn
+          method: post
+          cors: true
