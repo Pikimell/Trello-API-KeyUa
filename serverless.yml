@@ -14,14 +14,26 @@ provider:
   name: aws
   runtime: nodejs12.x
   stage: dev
-  region: us-east-1
-  # To load environment variables externally
-  # rename env.example to .env and uncomment
-  # the following line. Also, make sure to not
-  # commit your .env.
-  #
-  #environment:
-  #  SAMPLE_ENV_VAR: ${env:SAMPLE_ENV_VAR}
+  region: us-east-2
+  lambdaHashingVersion: 20201221
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+        - cognito-identity:*
+        - cognito-sync:*
+        - cognito-idp:*
+        - ssm:GetParameter
+      Resource:
+        - arn:aws:dynamodb:us-east-2:666398651410:table/pashchenko-columns
+        - arn:aws:dynamodb:us-east-2:666398651410:table/pashchenko-columnIndexes
+        - arn:aws:dynamodb:us-east-2:666398651410:table/pashchenko-cards
+        - arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
 
 functions:
   createColumn:
