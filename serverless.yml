@@ -1,9 +1,5 @@
 # NOTE: update this with your service name
-service: ku
-
-# Create an optimized package for our functions 
-package:
-  individually: true
+service: volodka-server
 
 plugins:
   - serverless-bundle # Package our functions with Webpack
