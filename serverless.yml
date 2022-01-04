@@ -212,7 +212,7 @@ functions:
 
   auth:
     handler: controllers/authorizationC.signIn
-    evironment:
+    environment:
       USER_POOL_ID: ${ssm:/VOLODKA_COGNITO_USER_POOL_ID}
       CLIENT_ID: ${ssm:/VOLODKA_COGNITO_CLIENT_ID}
     events:
