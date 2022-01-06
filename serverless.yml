@@ -230,3 +230,10 @@ functions:
           path: refreshToken
           method: post
           cors: true
+  signOut:
+    handler: controllers/authorization/signOut.signOut
+    events:
+      - http:
+          path: signOut
+          method: post
+          cors: true
