@@ -1,11 +1,5 @@
-const AmazonCognitoIdentity = require("amazon-cognito-identity-js");
-
-const poolData = {
-    UserPoolId: process.env.USER_POOL_ID,
-    ClientId: process.env.CLIENT_ID
-};
-
-const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
+const AmazonCognitoIdentity = require('amazon-cognito-identity-js');
+const {userPool} = require('./userConst');
 
 const signUp = async (event) => {
     const myData = JSON.parse(event.body);

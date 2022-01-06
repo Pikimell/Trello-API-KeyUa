@@ -1,30 +1,4 @@
-const AmazonCognitoIdentity = require('amazon-cognito-identity-js');
-
-const poolData = {
-    UserPoolId: process.env.USER_POOL_ID,
-    ClientId: process.env.CLIENT_ID
-};
-
-const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
-
-
-function getCognitoUser(login){
-    let userData = {
-        Username: login,
-        Pool: userPool
-    };
-
-    return new AmazonCognitoIdentity.CognitoUser(userData);
-}
-
-function getAuthDetails(login,password){
-    let userData = {
-        Username: login,
-        Password: password
-    };
-
-    return new AmazonCognitoIdentity.AuthenticationDetails(userData);
-}
+const {getCognitoUser,getAuthDetails} = require('./userConst');
 
 const signIn = async (event) => {
     const data = JSON.parse(event.body);

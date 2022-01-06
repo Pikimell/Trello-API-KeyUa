@@ -206,8 +206,8 @@ functions:
             arn: arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
 
 
-  auth:
-    handler: controllers/authorizationC.signIn
+  signIn:
+    handler: controllers/authorization/signIn.signIn
     environment:
       USER_POOL_ID: ${ssm:/VOLODKA_COGNITO_USER_POOL_ID}
       CLIENT_ID: ${ssm:/VOLODKA_COGNITO_CLIENT_ID}
@@ -217,9 +217,16 @@ functions:
           method: post
           cors: true
   signUp:
-    handler: controllers/SignUp.signUp
+    handler: controllers/authorization/signUp.signUp
     events:
       - http:
           path: signUp
+          method: post
+          cors: true
+  refreshToken:
+    handler: controllers/authorization/refreshToken.refreshToken
+    events:
+      - http:
+          path: refreshToken
           method: post
           cors: true
