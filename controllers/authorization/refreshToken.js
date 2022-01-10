@@ -26,7 +26,7 @@ const refreshToken = (event) => {
 
     return new Promise((resolve, reject) => {
         cognitoUser.getSession(function (err, session) {
-            if(!session.isValid()){
+            if(session.isValid()){
                 resolve({
                     statusCode: 200,
                     headers: {"Content-Type": "json/plain"},
