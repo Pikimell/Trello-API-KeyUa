@@ -216,6 +216,7 @@ functions:
           path: signIn
           method: post
           cors: true
+
   signUp:
     handler: controllers/authorization/signUp.signUp
     environment:
@@ -226,6 +227,7 @@ functions:
           path: signUp
           method: post
           cors: true
+
   refreshToken:
     handler: controllers/authorization/refreshToken.refreshToken
     environment:
@@ -236,6 +238,7 @@ functions:
           path: refreshToken
           method: post
           cors: true
+
   signOut:
     handler: controllers/authorization/signOut.signOut
     environment:
