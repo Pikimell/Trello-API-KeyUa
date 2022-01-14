@@ -218,6 +218,9 @@ functions:
           cors: true
   signUp:
     handler: controllers/authorization/signUp.signUp
+    environment:
+      USER_POOL_ID: ${ssm:/VOLODKA_COGNITO_USER_POOL_ID}
+      CLIENT_ID: ${ssm:/VOLODKA_COGNITO_CLIENT_ID}
     events:
       - http:
           path: signUp
@@ -225,6 +228,9 @@ functions:
           cors: true
   refreshToken:
     handler: controllers/authorization/refreshToken.refreshToken
+    environment:
+      USER_POOL_ID: ${ssm:/VOLODKA_COGNITO_USER_POOL_ID}
+      CLIENT_ID: ${ssm:/VOLODKA_COGNITO_CLIENT_ID}
     events:
       - http:
           path: refreshToken
@@ -232,6 +238,9 @@ functions:
           cors: true
   signOut:
     handler: controllers/authorization/signOut.signOut
+    environment:
+      USER_POOL_ID: ${ssm:/VOLODKA_COGNITO_USER_POOL_ID}
+      CLIENT_ID: ${ssm:/VOLODKA_COGNITO_CLIENT_ID}
     events:
       - http:
           path: signOut

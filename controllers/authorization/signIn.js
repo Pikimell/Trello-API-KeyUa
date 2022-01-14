@@ -4,6 +4,7 @@ const signIn = async (event) => {
     const data = JSON.parse(event.body);
     const {email, password} = data;
 
+
     return new Promise((resolve) => {
         try{
             getCognitoUser(email).authenticateUser(getAuthDetails(email,password),{

@@ -4,10 +4,9 @@ const {getCognitoUser} = require('./userConst');
 
 const refreshToken = (event) => {
     const data = JSON.parse(event.body);
-    const {username, tokens} = data;
-    const token = new CognitoRefreshToken({RefreshToken: tokens.refreshToken.token});
+    const {username, refreshToken} = data;
+    const token = new CognitoRefreshToken({RefreshToken: refreshToken});
     let cognitoUser = getCognitoUser(username);
-    //cognitoUser.setSignInUserSession(getSessionsData(tokens));
 
     return new Promise((resolve) => {
         cognitoUser.refreshSession(token, (err, session) => {
