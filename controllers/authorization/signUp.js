@@ -18,7 +18,7 @@ const signUp = async (event) => {
                 if (err) {
                     return resolve({statusCode: 422, body: JSON.stringify(err)});
                 }
-                return resolve({statusCode: 201, body: JSON.stringify(result)});
+                return resolve({statusCode: 201, headers: {"Access-Control-Allow-Origin":"*"},body: JSON.stringify(result)});
             });
     });
 };

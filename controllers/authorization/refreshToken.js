@@ -13,11 +13,13 @@ const refreshToken = (event) => {
             if(err){
                 resolve({
                     statusCode: 400,
+                    headers: {"Access-Control-Allow-Origin":"*"},
                     body: JSON.stringify(err)
                 });
             }else{
                 resolve({
                     statusCode: 200,
+                    headers: {"Access-Control-Allow-Origin":"*"},
                     body: JSON.stringify(session)
                 });
             }

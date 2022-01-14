@@ -6,7 +6,7 @@ const signOut = (event) => {
     let cognitoUser = getCognitoUser(username);
     return new Promise((resolve) => {
         cognitoUser.signOut(() => {
-            resolve({body: 'signOut Ok!'});
+            resolve({headers: {"Access-Control-Allow-Origin":"*"},body: 'signOut Ok!'});
         });
     });
 };
