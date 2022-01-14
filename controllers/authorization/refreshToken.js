@@ -15,7 +15,7 @@ const refreshToken = (event) => {
                 resolve({
                     statusCode: 400,
                     headers: {"Access-Control-Allow-Origin": "*"},
-                    body: JSON.stringify(err)
+                    body: err.toString()
                 });
             } else {
                 resolve({
