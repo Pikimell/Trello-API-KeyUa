@@ -1,4 +1,5 @@
 import {CognitoRefreshToken} from "amazon-cognito-identity-js";
+
 const {getCognitoUser} = require('./userConst');
 
 
@@ -10,16 +11,16 @@ const refreshToken = (event) => {
 
     return new Promise((resolve) => {
         cognitoUser.refreshSession(token, (err, session) => {
-            if(err){
+            if (err) {
                 resolve({
                     statusCode: 400,
-                    headers: {"Access-Control-Allow-Origin":"*"},
+                    headers: {"Access-Control-Allow-Origin": "*"},
                     body: JSON.stringify(err)
                 });
-            }else{
+            } else {
                 resolve({
                     statusCode: 200,
-                    headers: {"Access-Control-Allow-Origin":"*"},
+                    headers: {"Access-Control-Allow-Origin": "*"},
                     body: JSON.stringify(session)
                 });
             }

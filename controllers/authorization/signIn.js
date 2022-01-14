@@ -1,4 +1,4 @@
-const {getCognitoUser,getAuthDetails} = require('./userConst');
+const {getCognitoUser, getAuthDetails} = require('./userConst');
 
 const signIn = async (event) => {
     const data = JSON.parse(event.body);
@@ -6,8 +6,8 @@ const signIn = async (event) => {
 
 
     return new Promise((resolve) => {
-        try{
-            getCognitoUser(email).authenticateUser(getAuthDetails(email,password),{
+        try {
+            getCognitoUser(email).authenticateUser(getAuthDetails(email, password), {
                 onSuccess: (result) => {
                     const token = {
                         accessToken: result.getAccessToken(),
@@ -16,11 +16,11 @@ const signIn = async (event) => {
                     };
                     resolve({
                         statusCode: 200,
-                        headers: {"Access-Control-Allow-Origin":"*"},
+                        headers: {"Access-Control-Allow-Origin": "*"},
                         body: JSON.stringify(token)
                     });
                 },
-                onFailure: function(err) {
+                onFailure: function (err) {
                     resolve({
                         statusCode: 400,
                         headers: {"Content-Type": "text/plain"},
@@ -28,7 +28,7 @@ const signIn = async (event) => {
                     });
                 }
             });
-        }catch (err){
+        } catch (err) {
             resolve({
                 statusCode: 400,
                 body: err.toString()
