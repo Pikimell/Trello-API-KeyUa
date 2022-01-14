@@ -9,6 +9,10 @@ const refreshToken = (event) => {
     const token = new CognitoRefreshToken({RefreshToken: refreshToken});
     let cognitoUser = getCognitoUser(username);
 
+    console.log("\n\n\n-------------------");
+    console.log(data);
+    console.log("-------------------\n\n\n");
+
     return new Promise((resolve) => {
         cognitoUser.refreshSession(token, (err, session) => {
             if (err) {
