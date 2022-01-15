@@ -19,7 +19,7 @@ const refreshToken = (event) => {
                         'Access-Control-Allow-Methods': 'POST, GET, OPTIONS',
                         'Access-Control-Allow-Credentials': true
                     },
-                    body: "укк" + err.toString()
+                    body: "err" + err.toString()
                 });
             } else {
 
