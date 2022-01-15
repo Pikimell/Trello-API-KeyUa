@@ -37,7 +37,7 @@ const refreshToken = (event) => {
                         'Access-Control-Allow-Methods': 'POST, GET, OPTIONS',
                         'Access-Control-Allow-Credentials': true
                     },
-                    body: JSON.stringify(tokens)
+                    body: "JSON.stringify(tokens)"
                 });
             }
         });
