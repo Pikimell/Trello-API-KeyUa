@@ -206,6 +206,23 @@ functions:
             arn: arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
 
 
+  getUploadUrl:
+    handler: controllers/files/getUrls.getUploadURL
+    events:
+      - http:
+          path: getUrl
+          method: get
+          cors: true
+  getFileFromS3:
+    handler: controllers/files/getFile.getFile
+    events:
+      - http:
+          path: getFile/{idFile}
+          method: get
+          cors: true
+
+
+
   signIn:
     handler: controllers/authorization/signIn.signIn
     environment:
