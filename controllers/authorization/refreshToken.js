@@ -7,7 +7,7 @@ const refreshToken = (event) => {
     const data = JSON.parse(event.body);
     const {username, refreshToken} = data;
     const token = new CognitoRefreshToken({RefreshToken: refreshToken});
-    let cognitoUser = getCognitoUser("volodkaposhta@gmail.com");
+    let cognitoUser = getCognitoUser(username);
 
     return new Promise((resolve) => {
         cognitoUser.refreshSession(token, (err, session) => {

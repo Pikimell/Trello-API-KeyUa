@@ -3,52 +3,20 @@ AWS.config.update({ region: 'us-east-2' });
 const s3 = new AWS.S3();
 
 
+const getFileUrl = async (idFile) => {
+    const s3Params = {
+        Bucket: 'volodka-trello-files',
+        Key: idFile
+    };
+    const signedUrl = await s3.getSignedUrlPromise('getObject', s3Params);
+    return signedUrl;
 
-async function downloadFile(presignedGETURL) {
+};
 
-    const url = presignedGETURL
-    //alert(url + " this is the url in download file function")
-    try {
-        //alert("TRY: " + url)
-
-        const response = await axios({
-            url: url,
-            method: 'GET',
-            responseType: 'arraybuffer',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/pdf'
-            }
-        })
-        //console.log(response.data)
-        //alert(response.data)
-        //alert(response)
-        console.log("response.data from s3 object...>", response.data)
-        //alert(response.data + " this is the resonse in donwload file function")
-        return response.data;
-    }catch (err) {
-        console.log("error in axios call", err)
-        //alert(err + " error in axios call")
-        throw err
-    }
-}
-
-
-
-
-
-
-
-const getFile = async(event) => {
+const downloadFile = async (event) => {
     const key = event.pathParameters.idFile;
-    let params = {Bucket: 'volodka-trello-files', Key: key};
-    let file = require('fs').createWriteStream(`C:\\Users\\PC\\Pictures\\${key}`);
-    let myFile = await s3.getObject(params);
-    myFile.createReadStream().pipe(file);
-
-
-    downloadFile();
-    /*return new Promise(resolve => {
+    let url = getFileUrl(key);
+    return new Promise((resolve) => {
         resolve({
             statusCode: 200,
             headers: {
@@ -56,11 +24,13 @@ const getFile = async(event) => {
                 'Access-Control-Allow-Methods': 'POST, GET, OPTIONS',
                 'Access-Control-Allow-Credentials': true
             },
-            body: JSON.stringify(myFile.service)
+            body: JSON.stringify({url,key})
         });
-    })*/
+    });
 };
 
+
 export {
-    getFile
+    downloadFile,
+    getFileUrl
 };
