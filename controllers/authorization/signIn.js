@@ -22,7 +22,7 @@ const signIn = async (event) => {
                 },
                 onFailure: function (err) {
                     resolve({
-                        statusCode: 400,
+                        statusCode: 401,
                         headers: {"Content-Type": "text/plain"},
                         body: err.toString()
                     });

@@ -5,9 +5,9 @@ const {getCognitoUser} = require('./userConst');
 
 const refreshToken = (event) => {
     const data = JSON.parse(event.body);
-    const {username, refreshToken} = data;
+    const {refreshToken} = data;
     const token = new CognitoRefreshToken({RefreshToken: refreshToken});
-    let cognitoUser = getCognitoUser(username);
+    let cognitoUser = getCognitoUser('');
 
     return new Promise((resolve) => {
         cognitoUser.refreshSession(token, (err, session) => {
@@ -37,7 +37,7 @@ const refreshToken = (event) => {
                         'Access-Control-Allow-Methods': 'POST, GET, OPTIONS',
                         'Access-Control-Allow-Credentials': true
                     },
-                    body: "JSON.stringify(tokens)"
+                    body: JSON.stringify(tokens)
                 });
             }
         });
