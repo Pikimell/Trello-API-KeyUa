@@ -1,8 +1,6 @@
 const AWS = require('aws-sdk');
 AWS.config.update({ region: 'us-east-2' });
 const s3 = new AWS.S3();
-
-// Change this value to adjust the signed URL's expiration
 const URL_EXPIRATION_SECONDS = 300;
 
 const getUploadURL = async function(file) {
@@ -26,7 +24,6 @@ const getFile = async (event) => {
     const uploadURL = await s3.getSignedUrlPromise('getObject', s3Params);
 
     return new Promise((resolve) => {
-        console.log(uploadURL);
         resolve({
             statusCode: 200,
             headers: {

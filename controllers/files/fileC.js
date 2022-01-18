@@ -12,8 +12,8 @@ const getFiles = async (event, context, callback) => {
 };
 
 const pushFile = async (event, context, callback) => {
-    const data = JSON.parse(event.body);
     const fetch = fetchDB(callback);
+    let data = JSON.parse(event.body);
     try {
         const res = await pushFileServ(data);
         return fetch(null, res);

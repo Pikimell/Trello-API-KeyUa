@@ -1,23 +1,26 @@
-const axios = require('axios');
 const {getUploadURL} = require("./getUrls");
 
 const uploadFile = async (event) => {
 
-    console.log('\n\n\n\n\n\n\n');
-    console.log(JSON.parse(event.body));
-    console.log('\n\n\n\n\n\n\n');
-
-    const file = JSON.parse(event.body).file;
+    let body = JSON.parse(event.body);
+    const file = body.file;
     let params = {
         fileName: `${file.name}`,
         fileType: `${file.type}`,
     };
 
     const url = await getUploadURL(params);
-    axios.put(url, file)
-        .then(response => {
-            //console.log(response); // TODO write to database
+
+    return new Promise(resolve => {
+        resolve({
+            statusCode: 200,
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+                'Access-Control-Allow-Credentials': true
+            },
+            body: JSON.stringify({url})
         });
+    });
 };
 
 export {

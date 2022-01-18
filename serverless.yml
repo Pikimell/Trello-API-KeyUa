@@ -25,11 +25,13 @@ provider:
         - cognito-sync:*
         - cognito-idp:*
         - ssm:GetParameter
+        - s3:*
       Resource:
         - arn:aws:dynamodb:us-east-2:666398651410:table/pashchenko-columns
         - arn:aws:dynamodb:us-east-2:666398651410:table/pashchenko-columnIndexes
         - arn:aws:dynamodb:us-east-2:666398651410:table/pashchenko-cards
         - arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
+        - arn:aws:s3:::volodka-trello-files/*
 
 functions:
   createColumn:
@@ -225,8 +227,17 @@ functions:
           cors: true
           authorizer:
             arn: arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
-  pushFile:
+  getUploadUrl:
     handler: controllers/files/uploadFile.uploadFile
+    events:
+      - http:
+          path: getUploadUrl
+          method: post
+          cors: true
+          authorizer:
+            arn: arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
+  pushFile:
+    handler: controllers/files/fileC.pushFile
     events:
       - http:
           path: pushFile
@@ -238,7 +249,7 @@ functions:
     handler: controllers/files/fileC.deleteFile
     events:
       - http:
-          path: deleteFile
+          path: deleteFile/{id_file}
           method: delete
           cors: true
           authorizer:
