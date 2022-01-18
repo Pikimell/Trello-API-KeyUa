@@ -14,7 +14,6 @@ const fetchDB = (callback) => {
             statusCode: 200,
             headers: {
                 "Access-Control-Allow-Origin": "*",
-                "Content-Type": "text/plain"
             },
             body: JSON.stringify(result),
         };
