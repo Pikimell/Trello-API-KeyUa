@@ -25,11 +25,13 @@ provider:
         - cognito-sync:*
         - cognito-idp:*
         - ssm:GetParameter
+        - s3:*
       Resource:
         - arn:aws:dynamodb:us-east-2:666398651410:table/pashchenko-columns
         - arn:aws:dynamodb:us-east-2:666398651410:table/pashchenko-columnIndexes
         - arn:aws:dynamodb:us-east-2:666398651410:table/pashchenko-cards
         - arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
+        - arn:aws:s3:::volodka-trello-files/*
 
 functions:
   createColumn:
@@ -91,41 +93,41 @@ functions:
           authorizer:
             arn: arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
   getCards:
-      handler: controllers/cardC.getCards
-      events:
-        - http:
-            path: getCards
-            method: get
-            cors: true
-            authorizer:
-            arn: arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
+    handler: controllers/cardC.getCards
+    events:
+      - http:
+          path: getCards
+          method: get
+          cors: true
+          authorizer:
+          arn: arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
   getCard:
-      handler: controllers/cardC.getCard
-      events:
-        - http:
-            path: getCard/{idCard}
-            method: get
-            cors: true
-            authorizer:
-            arn: arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
+    handler: controllers/cardC.getCard
+    events:
+      - http:
+          path: getCard/{idCard}
+          method: get
+          cors: true
+          authorizer:
+          arn: arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
   deleteCard:
-      handler: controllers/cardC.deleteCard
-      events:
-        - http:
-            path: deleteCard/{idCard}
-            method: delete
-            cors: true
-            authorizer:
-            arn: arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
+    handler: controllers/cardC.deleteCard
+    events:
+      - http:
+          path: deleteCard/{idCard}
+          method: delete
+          cors: true
+          authorizer:
+          arn: arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
   updateCard:
-      handler: controllers/cardC.updateCard
-      events:
-        - http:
-            path: updateCard/{idCard}
-            method: put
-            cors: true
-            authorizer:
-            arn: arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
+    handler: controllers/cardC.updateCard
+    events:
+      - http:
+          path: updateCard/{idCard}
+          method: put
+          cors: true
+          authorizer:
+          arn: arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
 
 
 
@@ -169,41 +171,90 @@ functions:
           authorizer:
             arn: arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
   getCardsIndex:
-      handler: controllers/cardIndexC.getIndexes
-      events:
-        - http:
-            path: getCardIndexes
-            method: get
-            cors: true
-            authorizer:
-            arn: arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
+    handler: controllers/cardIndexC.getIndexes
+    events:
+      - http:
+          path: getCardIndexes
+          method: get
+          cors: true
+          authorizer:
+          arn: arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
   getIndexesForCol:
-      handler: controllers/cardIndexC.getIndexesForCol
-      events:
-        - http:
-            path: getIndexesForCol/{idColumn}
-            method: get
-            cors: true
-            authorizer:
-            arn: arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
+    handler: controllers/cardIndexC.getIndexesForCol
+    events:
+      - http:
+          path: getIndexesForCol/{idColumn}
+          method: get
+          cors: true
+          authorizer:
+          arn: arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
   updateCardIndex:
-      handler: controllers/cardIndexC.updateIndexes
-      events:
-        - http:
-            path: updateCardsIndexes/{idIndex}
-            method: put
-            cors: true
-            authorizer:
-            arn: arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
+    handler: controllers/cardIndexC.updateIndexes
+    events:
+      - http:
+          path: updateCardsIndexes/{idIndex}
+          method: put
+          cors: true
+          authorizer:
+          arn: arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
   deleteCardIndex:
-      handler: controllers/cardIndexC.deleteIndexCard
-      events:
-        - http:
-            path: deleteCardIndexes/{idColumn}
-            method: delete
-            cors: true
-            authorizer:
+    handler: controllers/cardIndexC.deleteIndexCard
+    events:
+      - http:
+          path: deleteCardIndexes/{idColumn}
+          method: delete
+          cors: true
+          authorizer:
+          arn: arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
+
+
+
+  getFile:
+    handler: controllers/files/getUrls.getFile
+    events:
+      - http:
+          path: getFile/{id_file}
+          method: get
+          cors: true
+          authorizer:
             arn: arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
+  getFiles:
+    handler: controllers/files/fileC.getFiles
+    events:
+      - http:
+          path: getFiles
+          method: get
+          cors: true
+          authorizer:
+            arn: arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
+  getUploadUrl:
+    handler: controllers/files/uploadFile.uploadFile
+    events:
+      - http:
+          path: getUploadUrl
+          method: post
+          cors: true
+          authorizer:
+            arn: arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
+  pushFile:
+    handler: controllers/files/fileC.pushFile
+    events:
+      - http:
+          path: pushFile
+          method: post
+          cors: true
+          authorizer:
+            arn: arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
+  deleteFile:
+    handler: controllers/files/fileC.deleteFile
+    events:
+      - http:
+          path: deleteFile/{id_file}
+          method: delete
+          cors: true
+          authorizer:
+            arn: arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
+
 
 
   signIn:
