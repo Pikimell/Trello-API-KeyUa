@@ -226,8 +226,6 @@ functions:
           path: getFiles
           method: get
           cors: true
-          authorizer:
-            arn: arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
   getUploadUrl:
     handler: controllers/files/uploadFile.uploadFile
     events:
