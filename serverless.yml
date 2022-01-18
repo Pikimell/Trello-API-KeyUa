@@ -30,6 +30,7 @@ provider:
         - arn:aws:dynamodb:us-east-2:666398651410:table/pashchenko-columns
         - arn:aws:dynamodb:us-east-2:666398651410:table/pashchenko-columnIndexes
         - arn:aws:dynamodb:us-east-2:666398651410:table/pashchenko-cards
+        - arn:aws:dynamodb:us-east-2:666398651410:table/pashchenko-files
         - arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
         - arn:aws:s3:::volodka-trello-files/*
 
