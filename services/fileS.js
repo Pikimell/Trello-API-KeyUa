@@ -1,12 +1,9 @@
-const {getFiles,getFile,pushFile,deleteFile} = require("../repositories/fileR");
+const {getFiles,pushFile,deleteFile} = require("../repositories/fileR");
 
 const getFilesServ = () => {
     return getFiles();
 };
 
-const getFileServ = (params) => {
-    return getFile(params);
-};
 
 const pushFileServ = (params) => {
     return pushFile(params);
@@ -18,7 +15,6 @@ const deleteFileServ = (params) => {
 
 
 export {
-    getFileServ,
     getFilesServ,
     pushFileServ,
     deleteFileServ

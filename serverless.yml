@@ -206,30 +206,13 @@ functions:
           arn: arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
 
 
-  getUploadUrl:
-    handler: controllers/files/getUrls.getUploadURL
-    events:
-      - http:
-          path: getUrl
-          method: get
-          cors: true
-          authorizer:
-            arn: arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
-  getFileFromS3:
-    handler: controllers/files/getFile.downloadFile
-    events:
-      - http:
-          path: getFileUrl/{idFile}
-          method: get
-          cors: true
-          authorizer:
-            arn: arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
+
   getFile:
-    handler: controllers/files/fileC.getFile
+    handler: controllers/files/getUrls.getFile
     events:
       - http:
-          path: getFile
-          method: post
+          path: getFile/{id_file}
+          method: get
           cors: true
           authorizer:
             arn: arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
@@ -243,7 +226,7 @@ functions:
           authorizer:
             arn: arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
   pushFile:
-    handler: controllers/files/fileC.pushFile
+    handler: controllers/files/uploadFile.uploadFile
     events:
       - http:
           path: pushFile
