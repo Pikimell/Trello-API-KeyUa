@@ -48,6 +48,6 @@ const deleteFile = (event) => {
 
 };
 
-export {
+module.exports = {
     getFiles, pushFile, deleteFile
 };

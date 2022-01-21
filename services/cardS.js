@@ -5,11 +5,15 @@ const getCardsServ = () => {
 };
 
 const getCardServ = (params) => {
-    return getCard(params);
+    if(validateGetCardParams(params.pathParameters.idCard) === 'string')
+        return getCard(params);
+    else return null;
 };
 
 const pushCardServ = (params) => {
-    return pushCard(params);
+    if(validatePushCardParams(params))
+        return pushCard(params);
+    else return null;
 };
 
 const deleteCardServ = (params) => {
@@ -20,11 +24,20 @@ const updateCardServ = (params) => {
     return updateCard(params);
 };
 
+const validateGetCardParams = (idCard) => {
+    return typeof idCard;
+}
 
-export {
+const validatePushCardParams = ({idColumn,title, idCard, description}) => {
+    return typeof idColumn === 'string' && typeof title === 'string' && typeof idCard === 'string' && typeof description === 'string';
+}
+
+module.exports =  {
     getCardsServ,
     getCardServ,
     pushCardServ,
     deleteCardServ,
-    updateCardServ
+    updateCardServ,
+    validateGetCardParams,
+    validatePushCardParams
 };

@@ -60,7 +60,7 @@ const updateCard = ({event,data}) => {
     return dynamoDb.update(params).promise();
 };
 
-export {
+module.exports = {
     getCards,
     getCard,
     pushCard,

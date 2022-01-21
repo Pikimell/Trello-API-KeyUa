@@ -55,7 +55,7 @@ const updateColumn = ({event, data}) => {
     return dynamoDb.update(params).promise();
 };
 
-export {
+module.exports = {
     getColumns,
     getColumn,
     pushColumn,

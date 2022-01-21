@@ -4,7 +4,6 @@ const getFilesServ = () => {
     return getFiles();
 };
 
-
 const pushFileServ = (params) => {
     return pushFile(params);
 };
@@ -14,8 +13,14 @@ const deleteFileServ = (params) => {
 };
 
 
-export {
+const validateParamsForPushFile = ({id_file, idCard}) => {
+    return !(typeof id_file !== 'string' || typeof idCard !== 'string' || id_file.includes(' '));
+}
+
+
+module.exports = {
     getFilesServ,
     pushFileServ,
-    deleteFileServ
+    deleteFileServ,
+    validateParamsForPushFile
 };
