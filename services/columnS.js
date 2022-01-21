@@ -11,7 +11,7 @@ const getColumnServ = (params) => {
 };
 
 const pushColumnServ = (params) => {
-    if(validatePushColumnParams(params.data))
+    if(validatePushColumnParams(params))
         return pushColumn(params);
     return null;
 };
