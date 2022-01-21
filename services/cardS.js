@@ -26,11 +26,11 @@ const updateCardServ = (params) => {
 
 const validateGetCardParams = (idCard) => {
     return typeof idCard;
-}
+};
 
 const validatePushCardParams = ({idColumn,title, idCard, description}) => {
     return typeof idColumn === 'string' && typeof title === 'string' && typeof idCard === 'string' && typeof description === 'string';
-}
+};
 
 module.exports =  {
     getCardsServ,

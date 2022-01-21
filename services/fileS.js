@@ -15,7 +15,7 @@ const deleteFileServ = (params) => {
 
 const validateParamsForPushFile = ({id_file, idCard}) => {
     return !(typeof id_file !== 'string' || typeof idCard !== 'string' || id_file.includes(' '));
-}
+};
 
 
 module.exports = {
