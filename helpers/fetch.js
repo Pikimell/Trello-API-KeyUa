@@ -1,4 +1,4 @@
-export const fetchDB = (callback) => {
+const fetchDB = (callback) => {
     return (error, result) => {
         if (error) {
             console.error(error);
@@ -21,6 +21,6 @@ export const fetchDB = (callback) => {
     };
 };
 
-export default {
+export {
     fetchDB
 };

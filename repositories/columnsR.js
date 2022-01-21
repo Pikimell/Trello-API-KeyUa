@@ -1,14 +1,14 @@
 const {dynamoDb} = require("./connection");
 const COLUMNS_TABLE = 'pashchenko-columns';
 
-export const getColumns = () => {
+const getColumns = () => {
     const params = {
         TableName: COLUMNS_TABLE,
     };
     return dynamoDb.scan(params).promise();
 };
 
-export const getColumn = (event) => {
+const getColumn = (event) => {
     const params = {
         TableName: COLUMNS_TABLE,
         Key: {
@@ -18,7 +18,7 @@ export const getColumn = (event) => {
     return dynamoDb.get(params).promise();
 };
 
-export const pushColumn = (data) => {
+const pushColumn = (data) => {
     const params = {
         TableName: COLUMNS_TABLE,
         Item: {
@@ -29,7 +29,7 @@ export const pushColumn = (data) => {
     return dynamoDb.put(params).promise();
 };
 
-export const deleteColumn = (event) => {
+const deleteColumn = (event) => {
     const params = {
         TableName: COLUMNS_TABLE,
         Key: {
@@ -39,7 +39,7 @@ export const deleteColumn = (event) => {
     return dynamoDb.delete(params).promise();
 };
 
-export const updateColumn = ({event, data}) => {
+const updateColumn = ({event, data}) => {
     const params = {
         TableName: COLUMNS_TABLE,
         Key: {
@@ -55,7 +55,7 @@ export const updateColumn = ({event, data}) => {
     return dynamoDb.update(params).promise();
 };
 
-export default {
+export {
     getColumns,
     getColumn,
     pushColumn,

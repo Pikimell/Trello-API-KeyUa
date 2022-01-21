@@ -1,5 +1,5 @@
 import {fetchDB} from "./fetch";
 
-export default {
+export {
     fetchDB
 };

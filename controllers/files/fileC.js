@@ -33,7 +33,7 @@ const deleteFile = async (event, context, callback) => {
 };
 
 
-export default {
+export {
     getFiles,
     pushFile,
     deleteFile

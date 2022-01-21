@@ -1,14 +1,14 @@
 import {dynamoDb} from "./connection";
 const CARDS_TABLE = 'pashchenko-cards';
 
-export const getCards = () => {
+const getCards = () => {
     const params = {
         TableName: CARDS_TABLE,
     };
     return dynamoDb.scan(params).promise();
 };
 
-export const getCard = (event) => {
+const getCard = (event) => {
     const params = {
         TableName: CARDS_TABLE,
         Key: {
@@ -18,7 +18,7 @@ export const getCard = (event) => {
     return dynamoDb.get(params).promise();
 };
 
-export const pushCard = (data) => {
+const pushCard = (data) => {
     const params = {
         TableName: CARDS_TABLE,
         Item: {
@@ -31,7 +31,7 @@ export const pushCard = (data) => {
     return dynamoDb.put(params).promise();
 };
 
-export const deleteCard = (event) => {
+const deleteCard = (event) => {
     const params = {
         TableName: CARDS_TABLE,
         Key: {
@@ -41,7 +41,7 @@ export const deleteCard = (event) => {
     return dynamoDb.delete(params).promise();
 };
 
-export const updateCard = ({event,data}) => {
+const updateCard = ({event,data}) => {
     const params = {
         TableName: CARDS_TABLE,
         Key: {
@@ -60,7 +60,7 @@ export const updateCard = ({event,data}) => {
     return dynamoDb.update(params).promise();
 };
 
-export default {
+export {
     getCards,
     getCard,
     pushCard,

@@ -1,26 +1,26 @@
 import {getColumns,getColumn,pushColumn,deleteColumn,updateColumn } from "../repositories/columnsR";
 
-export const getColumnsServ = () => {
+const getColumnsServ = () => {
     return getColumns();
 };
 
-export const getColumnServ = (params) => {
+const getColumnServ = (params) => {
     let type = validateGetColumnParams(params.pathParameters.idColumn);
     if(type === 'string') return getColumn(params);
     else return null;
 };
 
-export const pushColumnServ = (params) => {
+const pushColumnServ = (params) => {
     if(validatePushColumnParams(params.data))
         return pushColumn(params);
     return null;
 };
 
-export const deleteColumnServ = (params) => {
+const deleteColumnServ = (params) => {
     return deleteColumn(params);
 };
 
-export const updateColumnServ = (params) => {
+const updateColumnServ = (params) => {
     return updateColumn(params);
 };
 
@@ -32,7 +32,7 @@ const validatePushColumnParams = ({idColumn,title}) => {
     return typeof idColumn === 'string' && typeof title === 'string';
 };
 
-export default {
+export {
     getColumnsServ,
     getColumnServ,
     pushColumnServ,

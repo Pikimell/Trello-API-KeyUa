@@ -33,7 +33,7 @@ const updateIndexes = async (event, context, callback) => {
     }
 };
 
-export default {
+export {
     getIndexes,
     pushIndexes,
     updateIndexes

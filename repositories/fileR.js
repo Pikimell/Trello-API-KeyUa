@@ -4,14 +4,14 @@ AWS.config.update({ region: 'us-east-2' });
 const s3 = new AWS.S3();
 const FILES_TABLE = 'pashchenko-files';
 
-export const getFiles = () => {
+const getFiles = () => {
     const params = {
         TableName: FILES_TABLE,
     };
     return dynamoDb.scan(params).promise();
 };
 
-export const pushFile = (data) => {
+const pushFile = (data) => {
     const params = {
         TableName: FILES_TABLE, Item: {
             id_file: data.id_file, idCard: data.idCard
@@ -20,7 +20,7 @@ export const pushFile = (data) => {
     return dynamoDb.put(params).promise();
 };
 
-export const deleteFile = (event) => {
+const deleteFile = (event) => {
     let s3Params = {  Bucket: 'volodka-trello-files', Key: event.pathParameters.id_file};
 
     s3.deleteObject(s3Params, function(err, data) {
@@ -48,6 +48,6 @@ export const deleteFile = (event) => {
 
 };
 
-export default {
+export {
     getFiles, pushFile, deleteFile
 };

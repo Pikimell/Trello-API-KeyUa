@@ -1,14 +1,14 @@
 import {getFiles,pushFile,deleteFile} from "../repositories/fileR";
 
-export const getFilesServ = () => {
+const getFilesServ = () => {
     return getFiles();
 };
 
-export const pushFileServ = (params) => {
+const pushFileServ = (params) => {
     return pushFile(params);
 };
 
-export const deleteFileServ = (params) => {
+const deleteFileServ = (params) => {
     return deleteFile(params);
 };
 
@@ -18,7 +18,7 @@ const validateParamsForPushFile = ({id_file, idCard}) => {
 };
 
 
-export default {
+export {
     getFilesServ,
     pushFileServ,
     deleteFileServ,

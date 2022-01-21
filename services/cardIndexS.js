@@ -19,7 +19,7 @@ const deleteIndexCardS = (params) => {
     return deleteIndexCardR(params);
 };
 
-export default{
+export{
     getIndexesCardS,
     pushIndexesCardS,
     updateIndexesCardS,

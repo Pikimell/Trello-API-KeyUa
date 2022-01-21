@@ -1,14 +1,14 @@
 import {dynamoDb} from "./connection";
 const INDEX_TABLE = 'pashchenko-columnIndexes';
 
-export const getIndexes= () => {
+const getIndexes= () => {
     const params = {
         TableName: INDEX_TABLE,
     };
     return dynamoDb.scan(params).promise();
 };
 
-export const pushIndexes = (data) => {
+const pushIndexes = (data) => {
     const params = {
         TableName: INDEX_TABLE,
         Item: {
@@ -19,7 +19,7 @@ export const pushIndexes = (data) => {
     return dynamoDb.put(params).promise();
 };
 
-export const updateIndexes = ({event, data}) => {
+const updateIndexes = ({event, data}) => {
     const params = {
         TableName: INDEX_TABLE,
         Key: {
@@ -35,7 +35,7 @@ export const updateIndexes = ({event, data}) => {
     return dynamoDb.update(params).promise();
 };
 
-export default {
+export {
     getIndexes,
     pushIndexes,
     updateIndexes

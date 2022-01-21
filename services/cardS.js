@@ -32,7 +32,7 @@ const validatePushCardParams = ({idColumn,title, idCard, description}) => {
     return typeof idColumn === 'string' && typeof title === 'string' && typeof idCard === 'string' && typeof description === 'string';
 };
 
-export default {
+export {
     getCardsServ,
     getCardServ,
     pushCardServ,

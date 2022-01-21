@@ -23,6 +23,6 @@ const uploadFile = async (event) => {
     });
 };
 
-export default  {
+export  {
     uploadFile
 };

@@ -12,7 +12,7 @@ const updateIndexesS = (params) => {
     return updateIndexes(params);
 };
 
-export default{
+export{
     getIndexesS,
     pushIndexesS,
     updateIndexesS

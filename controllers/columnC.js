@@ -54,7 +54,7 @@ const updateColumn = async (event, context, callback) => {
 };
 
 
-export default  {
+export {
     getColumns,
     getColumn,
     pushColumn,
