@@ -1,5 +1,5 @@
-const {getFilesServ,pushFileServ,deleteFileServ} = require('../../services/fileS');
-const {fetchDB} = require('../../helpers/index');
+import {getFilesServ,pushFileServ,deleteFileServ} from '../../services/fileS';
+import {fetchDB} from '../../helpers/index';
 
 const getFiles = async (event, context, callback) => {
     const fetch = fetchDB(callback);
@@ -33,7 +33,7 @@ const deleteFile = async (event, context, callback) => {
 };
 
 
-export {
+export default {
     getFiles,
     pushFile,
     deleteFile

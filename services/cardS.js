@@ -1,4 +1,4 @@
-const {getCards,getCard,pushCard,deleteCard,updateCard } = require("../repositories/cardR");
+import {getCards,getCard,pushCard,deleteCard,updateCard } from "../repositories/cardR";
 
 const getCardsServ = () => {
     return getCards();
@@ -32,7 +32,7 @@ const validatePushCardParams = ({idColumn,title, idCard, description}) => {
     return typeof idColumn === 'string' && typeof title === 'string' && typeof idCard === 'string' && typeof description === 'string';
 };
 
-module.exports =  {
+export default {
     getCardsServ,
     getCardServ,
     pushCardServ,

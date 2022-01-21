@@ -55,7 +55,7 @@ const updateCard = async (event, context, callback) => {
     }
 };
 
-export {
+export default  {
     getCards,
     getCard,
     pushCard,

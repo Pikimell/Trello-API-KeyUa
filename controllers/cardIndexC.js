@@ -53,7 +53,7 @@ const deleteIndexCard = async (event, context, callback) => {
     }
 };
 
-export {
+export default  {
     getIndexes,
     pushIndexes,
     updateIndexes,

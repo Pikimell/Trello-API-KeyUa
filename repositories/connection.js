@@ -4,8 +4,8 @@ AWS.config.update({
     region: "us-east-2",
 });
 
-const dynamoDb = new AWS.DynamoDB.DocumentClient();
+export const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
-module.exports = {
+export default {
     dynamoDb
 };

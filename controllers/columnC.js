@@ -1,4 +1,4 @@
-const {getColumnsServ,getColumnServ,pushColumnServ,deleteColumnServ,updateColumnServ} = require('../services/columnS');
+import {getColumnsServ,getColumnServ,pushColumnServ,deleteColumnServ,updateColumnServ} from '../services/columnS';
 const {fetchDB} = require('../helpers/index');
 
 const getColumns = async (event, context, callback) => {
@@ -54,7 +54,7 @@ const updateColumn = async (event, context, callback) => {
 };
 
 
-export {
+export default  {
     getColumns,
     getColumn,
     pushColumn,

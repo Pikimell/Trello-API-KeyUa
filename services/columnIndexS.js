@@ -1,4 +1,4 @@
-const {getIndexes, pushIndexes, updateIndexes} = require("../repositories/columnIndexR");
+import {getIndexes, pushIndexes, updateIndexes} from "../repositories/columnIndexR";
 
 const getIndexesS = () => {
     return getIndexes();
@@ -12,7 +12,7 @@ const updateIndexesS = (params) => {
     return updateIndexes(params);
 };
 
-export{
+export default{
     getIndexesS,
     pushIndexesS,
     updateIndexesS

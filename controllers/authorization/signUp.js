@@ -1,5 +1,5 @@
 const AmazonCognitoIdentity = require('amazon-cognito-identity-js');
-const {userPool} = require('./userConst');
+import {userPool} from './userConst';
 
 const signUp = async (event) => {
     const myData = JSON.parse(event.body);
@@ -24,6 +24,6 @@ const signUp = async (event) => {
 };
 
 
-export {
+export default {
     signUp
 };

@@ -3,7 +3,7 @@ AWS.config.update({ region: 'us-east-2' });
 const s3 = new AWS.S3();
 const URL_EXPIRATION_SECONDS = 300;
 
-const getUploadURL = async function(file) {
+export const getUploadURL = async function(file) {
     const {fileName,fileType} = file;
     const s3Params = {
         Bucket: 'volodka-trello-files',
@@ -35,6 +35,6 @@ const getFile = async (event) => {
     });
 };
 
-export {
+export default {
     getUploadURL,getFile
 };

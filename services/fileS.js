@@ -1,14 +1,14 @@
-const {getFiles,pushFile,deleteFile} = require("../repositories/fileR");
+import {getFiles,pushFile,deleteFile} from "../repositories/fileR";
 
-const getFilesServ = () => {
+export const getFilesServ = () => {
     return getFiles();
 };
 
-const pushFileServ = (params) => {
+export const pushFileServ = (params) => {
     return pushFile(params);
 };
 
-const deleteFileServ = (params) => {
+export const deleteFileServ = (params) => {
     return deleteFile(params);
 };
 
@@ -18,7 +18,7 @@ const validateParamsForPushFile = ({id_file, idCard}) => {
 };
 
 
-module.exports = {
+export default {
     getFilesServ,
     pushFileServ,
     deleteFileServ,

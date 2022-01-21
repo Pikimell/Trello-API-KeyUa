@@ -1,6 +1,6 @@
 import {CognitoRefreshToken} from "amazon-cognito-identity-js";
 
-const {getCognitoUser} = require('./userConst');
+import {getCognitoUser} from './userConst';
 
 
 const refreshToken = (event) => {

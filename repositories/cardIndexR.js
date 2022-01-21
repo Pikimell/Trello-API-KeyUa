@@ -1,14 +1,14 @@
 const {dynamoDb} = require("./connection");
 const INDEX_TABLE = 'pashchenko-columnIndexes';
 
-const getIndexesCardsR= () => {
+export const getIndexesCardsR= () => {
     const params = {
         TableName: INDEX_TABLE,
     };
     return dynamoDb.scan(params).promise();
 };
 
-const getIndexesForColR = (event) => {
+export const getIndexesForColR = (event) => {
     const params = {
         TableName: INDEX_TABLE,
         Key: {
@@ -18,7 +18,7 @@ const getIndexesForColR = (event) => {
     return dynamoDb.get(params).promise();
 };
 
-const pushIndexesCardsR = (data) => {
+export const pushIndexesCardsR = (data) => {
     const params = {
         TableName: INDEX_TABLE,
         Item: {
@@ -29,7 +29,7 @@ const pushIndexesCardsR = (data) => {
     return dynamoDb.put(params).promise();
 };
 
-const updateIndexesCardR = ({event, data}) => {
+export const updateIndexesCardR = ({event, data}) => {
     const params = {
         TableName: INDEX_TABLE,
         Key: {
@@ -46,7 +46,7 @@ const updateIndexesCardR = ({event, data}) => {
 };
 
 
-const deleteIndexCardR = (event) => {
+export const deleteIndexCardR = (event) => {
     const params = {
         TableName: INDEX_TABLE,
         Key: {
@@ -56,7 +56,7 @@ const deleteIndexCardR = (event) => {
     return dynamoDb.delete(params).promise();
 };
 
-export {
+export default {
     getIndexesCardsR,
     pushIndexesCardsR,
     updateIndexesCardR,

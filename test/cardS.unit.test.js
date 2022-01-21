@@ -1,4 +1,4 @@
-const cardServ = require('../services/cardS');
+import cardServ from '../services/cardS';
 
 test('Get type params for GetCard', () =>{
     expect(cardServ.validateGetCardParams('IdCard')).toBe('string');

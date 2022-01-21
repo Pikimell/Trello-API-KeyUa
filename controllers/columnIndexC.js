@@ -1,4 +1,4 @@
-const {getIndexesS, pushIndexesS, updateIndexesS} = require('../services/columnIndexS');
+import {getIndexesS, pushIndexesS, updateIndexesS} from '../services/columnIndexS';
 const {fetchDB} = require('../helpers/index');
 
 const getIndexes = async (event, context, callback) => {
@@ -33,7 +33,7 @@ const updateIndexes = async (event, context, callback) => {
     }
 };
 
-export {
+export default {
     getIndexes,
     pushIndexes,
     updateIndexes

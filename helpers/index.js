@@ -1,5 +1,5 @@
-const {fetchDB} = require("./fetch");
+import {fetchDB} from "./fetch";
 
-export {
+export default {
     fetchDB
 };

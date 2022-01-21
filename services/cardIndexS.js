@@ -1,4 +1,4 @@
-const {getIndexesCardsR, pushIndexesCardsR, updateIndexesCardR,getIndexesForColR,deleteIndexCardR} = require("../repositories/cardIndexR");
+import {getIndexesCardsR, pushIndexesCardsR, updateIndexesCardR,getIndexesForColR,deleteIndexCardR} from "../repositories/cardIndexR";
 
 const getIndexesCardS = () => {
     return getIndexesCardsR();
@@ -19,7 +19,7 @@ const deleteIndexCardS = (params) => {
     return deleteIndexCardR(params);
 };
 
-export{
+export default{
     getIndexesCardS,
     pushIndexesCardS,
     updateIndexesCardS,

@@ -1,4 +1,4 @@
-const {getCognitoUser, getAuthDetails} = require('./userConst');
+import {getCognitoUser, getAuthDetails} from './userConst';
 
 const signIn = async (event) => {
     const data = JSON.parse(event.body);
@@ -37,6 +37,6 @@ const signIn = async (event) => {
     });
 };
 
-export {
+export default {
     signIn
 };

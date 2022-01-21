@@ -1,4 +1,4 @@
-const fileServ = require('../services/fileS');
+import fileServ from '../services/fileS';
 
 test('Validate data for PushFile', () =>{
     expect(fileServ.validateParamsForPushFile({

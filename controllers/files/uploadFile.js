@@ -1,4 +1,4 @@
-const {getUploadURL} = require("./getUrls");
+import {getUploadURL} from "./getUrls";
 
 const uploadFile = async (event) => {
 
@@ -23,6 +23,6 @@ const uploadFile = async (event) => {
     });
 };
 
-export {
+export default  {
     uploadFile
 };

@@ -1,4 +1,4 @@
-const columnServ = require('../services/columnS');
+import columnServ from '../services/columnS';
 
 test('Get type params for GetColumn', () =>{
     expect(columnServ.validateGetColumnParams('12312')).toBe('string');

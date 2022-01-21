@@ -1,4 +1,4 @@
-const {getCognitoUser} = require('./userConst');
+import {getCognitoUser} from './userConst';
 
 const signOut = (event) => {
     const data = JSON.parse(event.body);
@@ -11,6 +11,6 @@ const signOut = (event) => {
     });
 };
 
-export {
+export default {
     signOut
 };
