@@ -11,6 +11,6 @@ const signOut = (event) => {
     });
 };
 
-export default {
+export {
     signOut
 };

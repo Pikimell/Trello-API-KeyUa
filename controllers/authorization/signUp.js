@@ -24,6 +24,6 @@ const signUp = async (event) => {
 };
 
 
-export default {
+export {
     signUp
 };

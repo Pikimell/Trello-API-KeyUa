@@ -5,10 +5,10 @@ const poolData = {
     ClientId: "6orqho1ubfhu8s0j0uge4mk3js"//process.env.CLIENT_ID
 };
 
-export const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
+const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
 
 
-export const getCognitoUser = (login) => {
+const getCognitoUser = (login) => {
     let userData = {
         Username: login,
         Pool: userPool
@@ -16,7 +16,7 @@ export const getCognitoUser = (login) => {
     return new AmazonCognitoIdentity.CognitoUser(userData);
 };
 
-export const getAuthDetails = (login, password) => {
+const getAuthDetails = (login, password) => {
     let userData = {
         Username: login,
         Password: password
@@ -25,7 +25,7 @@ export const getAuthDetails = (login, password) => {
 };
 
 
-export default {
+export {
     poolData,
     userPool,
     getCognitoUser,

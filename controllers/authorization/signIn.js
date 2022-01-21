@@ -37,6 +37,6 @@ const signIn = async (event) => {
     });
 };
 
-export default {
+export {
     signIn
 };
