@@ -1,9 +1,5 @@
 # NOTE: update this with your service name
-service: ku
-
-# Create an optimized package for our functions 
-package:
-  individually: true
+service: volodka-server
 
 plugins:
   - serverless-bundle # Package our functions with Webpack
@@ -12,21 +8,294 @@ plugins:
 
 provider:
   name: aws
-  runtime: nodejs10.x
+  runtime: nodejs12.x
   stage: dev
-  region: us-east-1
-  # To load environment variables externally
-  # rename env.example to .env and uncomment
-  # the following line. Also, make sure to not
-  # commit your .env.
-  #
-  #environment:
-  #  SAMPLE_ENV_VAR: ${env:SAMPLE_ENV_VAR}
+  region: us-east-2
+  lambdaHashingVersion: 20201221
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+        - cognito-identity:*
+        - cognito-sync:*
+        - cognito-idp:*
+        - ssm:GetParameter
+        - s3:*
+      Resource:
+        - arn:aws:dynamodb:us-east-2:666398651410:table/pashchenko-columns
+        - arn:aws:dynamodb:us-east-2:666398651410:table/pashchenko-columnIndexes
+        - arn:aws:dynamodb:us-east-2:666398651410:table/pashchenko-cards
+        - arn:aws:dynamodb:us-east-2:666398651410:table/pashchenko-files
+        - arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
+        - arn:aws:s3:::volodka-trello-files/*
 
 functions:
-  hello:
-    handler: handler.hello
+  createColumn:
+    handler: controllers/columnC.pushColumn
     events:
       - http:
-          path: hello
+          path: pushColumn
+          method: post
+          cors: true
+          authorizer:
+            arn: arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
+  getColumns:
+    handler: controllers/columnC.getColumns
+    events:
+      - http:
+          path: getColumns
           method: get
+          cors: true
+          authorizer:
+            arn: arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
+  getColumn:
+    handler: controllers/columnC.getColumn
+    events:
+      - http:
+          path: getColumn/{idColumn}
+          method: get
+          cors: true
+          authorizer:
+            arn: arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
+  deleteColumn:
+    handler: controllers/columnC.deleteColumn
+    events:
+      - http:
+          path: deleteColumn/{idColumn}
+          method: delete
+          cors: true
+          authorizer:
+            arn: arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
+  updateColumn:
+    handler: controllers/columnC.updateColumn
+    events:
+      - http:
+          path: updateColumn/{idColumn}
+          method: put
+          cors: true
+          authorizer:
+            arn: arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
+
+
+
+
+  createCard:
+    handler: controllers/cardC.pushCard
+    events:
+      - http:
+          path: pushCard
+          method: post
+          cors: true
+          authorizer:
+            arn: arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
+  getCards:
+    handler: controllers/cardC.getCards
+    events:
+      - http:
+          path: getCards
+          method: get
+          cors: true
+          authorizer:
+          arn: arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
+  getCard:
+    handler: controllers/cardC.getCard
+    events:
+      - http:
+          path: getCard/{idCard}
+          method: get
+          cors: true
+          authorizer:
+          arn: arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
+  deleteCard:
+    handler: controllers/cardC.deleteCard
+    events:
+      - http:
+          path: deleteCard/{idCard}
+          method: delete
+          cors: true
+          authorizer:
+          arn: arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
+  updateCard:
+    handler: controllers/cardC.updateCard
+    events:
+      - http:
+          path: updateCard/{idCard}
+          method: put
+          cors: true
+          authorizer:
+          arn: arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
+
+
+
+  createIndexes:
+    handler: controllers/columnIndexC.pushIndexes
+    events:
+      - http:
+          path: pushIndexes
+          method: post
+          cors: true
+          authorizer:
+            arn: arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
+  getColumnIndex:
+    handler: controllers/columnIndexC.getIndexes
+    events:
+      - http:
+          path: getColIndexes
+          method: get
+          cors: true
+          authorizer:
+            arn: arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
+  updateColumnIndex:
+    handler: controllers/columnIndexC.updateIndexes
+    events:
+      - http:
+          path: updateIndexes/{idIndex}
+          method: put
+          cors: true
+          authorizer:
+            arn: arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
+
+
+
+  createCardIndexes:
+    handler: controllers/cardIndexC.pushIndexes
+    events:
+      - http:
+          path: pushColumnIndexes
+          method: post
+          cors: true
+          authorizer:
+            arn: arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
+  getCardsIndex:
+    handler: controllers/cardIndexC.getIndexes
+    events:
+      - http:
+          path: getCardIndexes
+          method: get
+          cors: true
+          authorizer:
+          arn: arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
+  getIndexesForCol:
+    handler: controllers/cardIndexC.getIndexesForCol
+    events:
+      - http:
+          path: getIndexesForCol/{idColumn}
+          method: get
+          cors: true
+          authorizer:
+          arn: arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
+  updateCardIndex:
+    handler: controllers/cardIndexC.updateIndexes
+    events:
+      - http:
+          path: updateCardsIndexes/{idIndex}
+          method: put
+          cors: true
+          authorizer:
+          arn: arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
+  deleteCardIndex:
+    handler: controllers/cardIndexC.deleteIndexCard
+    events:
+      - http:
+          path: deleteCardIndexes/{idColumn}
+          method: delete
+          cors: true
+          authorizer:
+          arn: arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
+
+
+
+  getFile:
+    handler: controllers/files/getUrls.getFile
+    events:
+      - http:
+          path: getFile/{id_file}
+          method: get
+          cors: true
+          authorizer:
+            arn: arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
+  getFiles:
+    handler: controllers/files/fileC.getFiles
+    events:
+      - http:
+          path: getFiles
+          method: get
+          cors: true
+  getUploadUrl:
+    handler: controllers/files/uploadFile.uploadFile
+    events:
+      - http:
+          path: getUploadUrl
+          method: post
+          cors: true
+          authorizer:
+            arn: arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
+  pushFile:
+    handler: controllers/files/fileC.pushFile
+    events:
+      - http:
+          path: pushFile
+          method: post
+          cors: true
+          authorizer:
+            arn: arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
+  deleteFile:
+    handler: controllers/files/fileC.deleteFile
+    events:
+      - http:
+          path: deleteFile/{id_file}
+          method: delete
+          cors: true
+          authorizer:
+            arn: arn:aws:cognito-idp:us-east-2:666398651410:userpool/us-east-2_dtSlpb6U3
+
+
+
+  signIn:
+    handler: controllers/authorization/signIn.signIn
+    environment:
+      USER_POOL_ID: ${ssm:/VOLODKA_COGNITO_USER_POOL_ID}
+      CLIENT_ID: ${ssm:/VOLODKA_COGNITO_CLIENT_ID}
+    events:
+      - http:
+          path: signIn
+          method: post
+          cors: true
+
+  signUp:
+    handler: controllers/authorization/signUp.signUp
+    environment:
+      USER_POOL_ID: ${ssm:/VOLODKA_COGNITO_USER_POOL_ID}
+      CLIENT_ID: ${ssm:/VOLODKA_COGNITO_CLIENT_ID}
+    events:
+      - http:
+          path: signUp
+          method: post
+          cors: true
+
+  refreshToken:
+    handler: controllers/authorization/refreshToken.refreshToken
+    environment:
+      USER_POOL_ID: ${ssm:/VOLODKA_COGNITO_USER_POOL_ID}
+      CLIENT_ID: ${ssm:/VOLODKA_COGNITO_CLIENT_ID}
+    events:
+      - http:
+          path: refreshToken
+          method: post
+          cors: true
+
+  signOut:
+    handler: controllers/authorization/signOut.signOut
+    environment:
+      USER_POOL_ID: ${ssm:/VOLODKA_COGNITO_USER_POOL_ID}
+      CLIENT_ID: ${ssm:/VOLODKA_COGNITO_CLIENT_ID}
+    events:
+      - http:
+          path: signOut
+          method: post
+          cors: true
